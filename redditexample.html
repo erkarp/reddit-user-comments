@@ -1,0 +1,77 @@
+<html ng-app="MyApp">
+  <head>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+	<script src="Chart.js"></script>
+    <script>
+angular.module('MyApp', ['controllers', 'services']);
+		
+angular.module('controllers',[])
+.controller('CloudController', ['$scope','Comments','BigString','PieChart', function($scope, Comments, BigString, PieChart){
+	Comments.get('bonerpalooza')
+	.then(function(array) {
+		$scope.array = array;
+		return BigString.write(array);
+	})
+	.then(function(string) {
+		$scope.string = string;
+		PieChart.make(string);
+	});
+	//http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
+}]);
+		
+angular.module('services', [])
+.factory('Comments', ['$http', function($http){
+	return {
+		get: function(user){
+			return $http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100');
+		}
+	};
+}])
+.factory('BigString', [function(){
+	return {
+		write: function(array){
+			return array.data.data.children.reduce(function(prev, comment){
+				return prev += comment.data.body;
+			}, '');
+		}
+	};
+}])
+.factory('PieChart', [function(){
+	return {
+		make: function(data){
+			console.log(data);
+		}
+	};
+}]);
+//http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
+		/*
+	.success(function(data) {
+				callback([bigString, data.data.children]);
+				this.str = bigString;
+				
+				
+				
+				
+		.config(['$routeProvider', function($routeProvider){
+	$routeProvider.when('redditexample.html', {
+		templateUrl: 'redditexample.html', 
+		controller:  "CloudController"
+	})
+	.otherwise({redirectTo: 'redditexample.html'});
+	}])
+	
+		*/
+    </script>
+	    
+	  <style>
+		  ul { list-style: none; padding: 0 10px; }
+	  </style>
+  </head>
+<body ng-controller="CloudController as cloud">
+	<ul>
+		<li ng-repeat="comment in comments">
+			{{comment.data.body}}<hr>
+		</li>
+	</ul>
+</body>
+</html>
