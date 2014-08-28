@@ -6,15 +6,15 @@
 angular.module('MyApp', ['controllers', 'services']);
 		
 angular.module('controllers',[])
-.controller('CloudController', ['$scope','Comments','PrepChart','MakeChart', function($scope, Comments, PrepChart, MakeChart){
+.controller('CloudController', ['$scope','Comments','PrepChart','DrawChart', function($scope, Comments, PrepChart, DrawChart){
 	Comments.get('bonerpalooza')
 	.then(function(array) {
-		$scope.array = array;
-		return PrepChart.parse(array);
+		$scope.array = array.data.data.children;
+		return PrepChart.parse(array.data.data.children);
 	})
 	.then(function(string) {
 		$scope.string = string;
-		MakeChart.make(string);
+		DrawChart.make(string);
 	});
 	//http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
 }]);
@@ -29,20 +29,51 @@ angular.module('services', [])
 }])
 .factory('PrepChart', [function(){
 	return {
-		parse: function(array){
-			console.log(array);
-			var data = { labels: [], datasets: [] }
-			array.data.data.children.forEach(function(comment){
-				if (data.labels.indexOf(comment.data.subreddit) == -1) {
-					data.datasets.push({
-						label: comment.data.subreddit
-					});
+		parse: function(comments) {
+			console.log(comments);
+			var data = { labels: [], datasets: [] };
+			for (var i=0; i<comments.length; i++) {
+				var monthYear = this.monthYr(comments[i].data.created);
+				data = this.addLine(data, comments[i].data.subreddit);
+				data = this.addDate(data, monthYear);
+				var line = this.getLine(data, comments[i].data.subreddit);
+				line[data.labels.indexOf(monthYear)]++;
+			}
+			console.log(data);
+		},	
+		monthYr: function(created) {
+			var timestamp = new Date(created * 1000);
+			return timestamp.getMonth() + " " + timestamp.getFullYear();
+		},
+		addLine: function(data, subreddit) {
+			if (this.getLine(data, subreddit) == -1) {
+				data.datasets.push({ 
+					label: subreddit, 
+					data: [0]
+				});
+			}
+			return data;
+		},
+		addDate: function(data, monthYear) {
+			if (data.labels.indexOf(monthYear) == -1) {
+				data.labels.push(monthYear);
+				data.datasets.forEach(function(item){
+					item.data.push(0);
+				});
+			}
+			return data;
+		}, 
+		getLine: function(data, subreddit) {
+			for (var i=0; i<data.datasets.length; i++) {
+				if (data.datasets[i].label == subreddit) {
+					return data.datasets[i].data;
 				}
-			});
+			}
+			return -1;
 		}
 	};
 }])
-.factory('MakeChart', [function(){
+.factory('DrawChart', [function(){
 	return {
 		make: function(data){
 			console.log(data);
