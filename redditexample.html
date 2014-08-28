@@ -6,15 +6,15 @@
 angular.module('MyApp', ['controllers', 'services']);
 		
 angular.module('controllers',[])
-.controller('CloudController', ['$scope','Comments','BigString','PieChart', function($scope, Comments, BigString, PieChart){
+.controller('CloudController', ['$scope','Comments','PrepChart','MakeChart', function($scope, Comments, PrepChart, MakeChart){
 	Comments.get('bonerpalooza')
 	.then(function(array) {
 		$scope.array = array;
-		return BigString.write(array);
+		return PrepChart.parse(array);
 	})
 	.then(function(string) {
 		$scope.string = string;
-		PieChart.make(string);
+		MakeChart.make(string);
 	});
 	//http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
 }]);
@@ -27,16 +27,22 @@ angular.module('services', [])
 		}
 	};
 }])
-.factory('BigString', [function(){
+.factory('PrepChart', [function(){
 	return {
-		write: function(array){
-			return array.data.data.children.reduce(function(prev, comment){
-				return prev += comment.data.body;
-			}, '');
+		parse: function(array){
+			console.log(array);
+			var data = { labels: [], datasets: [] }
+			array.data.data.children.forEach(function(comment){
+				if (data.labels.indexOf(comment.data.subreddit) == -1) {
+					data.datasets.push({
+						label: comment.data.subreddit
+					});
+				}
+			});
 		}
 	};
 }])
-.factory('PieChart', [function(){
+.factory('MakeChart', [function(){
 	return {
 		make: function(data){
 			console.log(data);
@@ -44,23 +50,10 @@ angular.module('services', [])
 	};
 }]);
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
-		/*
-	.success(function(data) {
-				callback([bigString, data.data.children]);
-				this.str = bigString;
-				
-				
-				
-				
-		.config(['$routeProvider', function($routeProvider){
-	$routeProvider.when('redditexample.html', {
-		templateUrl: 'redditexample.html', 
-		controller:  "CloudController"
-	})
-	.otherwise({redirectTo: 'redditexample.html'});
-	}])
-	
-		*/
+		/* make big string
+		array.data.data.children.reduce(function(prev, comment){
+				return prev += comment.data.body;
+			}, '');		*/
     </script>
 	    
 	  <style>
