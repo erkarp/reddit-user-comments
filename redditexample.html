@@ -1,6 +1,7 @@
 <html ng-app="MyApp">
   <head>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+	<script src="randomColor.js"></script>
 	<script src="Chart.js"></script>
     <script>
 angular.module('MyApp', ['controllers', 'services']);
@@ -12,9 +13,10 @@ angular.module('controllers',[])
 		$scope.array = array.data.data.children;
 		return PrepChart.parse(array.data.data.children);
 	})
-	.then(function(string) {
-		$scope.string = string;
-		DrawChart.make(string);
+	.then(function(data) {
+		$scope.data = data;
+		var id = document.getElementById("chart").getContext("2d");
+		var chart = new Chart(id).Line(DrawChart.make(data)); 
 	});
 	//http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
 }]);
@@ -34,12 +36,15 @@ angular.module('services', [])
 			var data = { labels: [], datasets: [] };
 			for (var i=0; i<comments.length; i++) {
 				var monthYear = this.monthYr(comments[i].data.created);
-				data = this.addLine(data, comments[i].data.subreddit);
+				if (i > 0) {
+					data = this.addLine(data, comments[i].data.subreddit);
+				}
 				data = this.addDate(data, monthYear);
 				var line = this.getLine(data, comments[i].data.subreddit);
 				line[data.labels.indexOf(monthYear)]++;
 			}
-			console.log(data);
+			console.log(data.datasets[0].data);
+			return data;
 		},	
 		monthYr: function(created) {
 			var timestamp = new Date(created * 1000);
@@ -76,7 +81,20 @@ angular.module('services', [])
 .factory('DrawChart', [function(){
 	return {
 		make: function(data){
-			console.log(data);
+			for (var i=0; i<data.datasets.length; i++) {
+				var col = randomColor({ luminosity: 'bright', format: 'rgb' });
+				data.datasets[i] = this.color(data.datasets[i], col);
+			}	
+			return data;
+		},
+		color: function(dataset, col) {
+			dataset.fillColor = "#eee";
+			dataset.strokeColor = col;
+			dataset.pointColor = col;
+			dataset.pointStrokeColor = "#fff";
+			dataset.pointHighlightFill = "#fff";
+			dataset.pointHighlightStroke = col;
+			return dataset;
 		}
 	};
 }]);
@@ -84,7 +102,10 @@ angular.module('services', [])
 		/* make big string
 		array.data.data.children.reduce(function(prev, comment){
 				return prev += comment.data.body;
-			}, '');		*/
+			}, '');	
+		colorVal: function(rgbArray){
+			return 'rgb('+rgbArray[0]+', '+rgbArray[1]+', '+rgbArray[2]+')';
+		}		*/
     </script>
 	    
 	  <style>
@@ -97,5 +118,6 @@ angular.module('services', [])
 			{{comment.data.body}}<hr>
 		</li>
 	</ul>
+	<canvas id="chart" width="600" height="500"></canvas>
 </body>
 </html>
