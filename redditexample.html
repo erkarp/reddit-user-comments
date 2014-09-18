@@ -1,5 +1,6 @@
 <html ng-app="MyApp">
   <head>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
 	<script src="randomColor.js"></script>
 	<script src="Chart.js"></script>
@@ -25,20 +26,13 @@ angular.module('controllers',[])
 		/* make big string
 		array.data.data.children.reduce(function(prev, comment){
 				return prev += comment.data.body;
-			}, '');	
-		colorVal: function(rgbArray){
-			return 'rgb('+rgbArray[0]+', '+rgbArray[1]+', '+rgbArray[2]+')';
-		}		*/
+			}, '');	*/
     </script>
-	    
-	  <style>
-		  ul { list-style: none; padding: 0 10px; }
-	  </style>
   </head>
 <body ng-controller="CloudController as cloud">
 	<canvas id="chart" width="600" height="500"></canvas>
 	<ul>
-		<li ng-repeat="set in datasets">{{set.label}}</li>
+		<li ng-repeat="set in datasets" style="background-color:{{set.pointColor}}">{{set.label}} ()</li>
 		<ul ng-repeat="set in datasets">
 			<li></li>
 		</ul>
