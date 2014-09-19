@@ -1,16 +1,23 @@
 canvas {
-	margin: 0 auto;
 	dispaly: block;
 }
 ul { 
 	list-style: none; 
-	padding: 0 10px; 
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
 }
 li {
 	display: inline-block;
-	border-radius: 7px;
 	background-color: #ccc;
 	color: #fff;
 	margin: 3px 7px;
 	padding: 3px;
+}
+ul ul {
+	display: block;
+}
+.container {
+	max-width:600px;
+	margin: 0 auto;
 }

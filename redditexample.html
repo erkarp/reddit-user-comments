@@ -5,31 +5,10 @@
 	<script src="randomColor.js"></script>
 	<script src="Chart.js"></script>
 	<script src="redditChart.js"></script>
-    <script>
-angular.module('controllers',[])
-.controller('CloudController', ['$scope','Comments','PrepData','DrawChart', function($scope, Comments, PrepData, DrawChart){
-	Comments.get('bonerpalooza')
-	.then(function(array) {
-		//$scope.comments = array.data.data.children;
-		return PrepData.parse(array.data.data.children);
-	})
-	.then(function(data) {
-		var id = document.getElementById("chart").getContext("2d");
-		var chart = new Chart(id).Line(DrawChart.make(data), { 
-			bezierCurve:false,
-			showTooltips:false
-		}); 
-		$scope.datasets = data.datasets;
-	});
-}]);
-//http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
-		/* make big string
-		array.data.data.children.reduce(function(prev, comment){
-				return prev += comment.data.body;
-			}, '');	*/
-    </script>
+	<script src="controllers.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
+	<div class="container">
 	<canvas id="chart" width="600" height="500"></canvas>
 	<ul>
 		<li ng-repeat="set in datasets" style="background-color:{{set.pointColor}}">{{set.label}} ()</li>
@@ -37,5 +16,6 @@ angular.module('controllers',[])
 			<li></li>
 		</ul>
 	</ul>
+	</div>
 </body>
 </html>

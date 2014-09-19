@@ -11,7 +11,6 @@ angular.module('services', [])
 .factory('PrepData', [function() {
 	return {
 		parse: function(comments) {
-			console.log(comments);
 			var data = { labels: [], datasets: [] };
 			for (var i=0; i<comments.length; i++) {
 				var monthYear = this.monthYr(comments[i].data.created);
@@ -44,7 +43,10 @@ angular.module('services', [])
 				data.datasets.forEach(function(item){
 					item.data.push(0);
 				});
-			}
+			} 
+			//every time a new monthYear is added, all the existing monthYears are missing arrays for it.
+			//could either fix this, or write a garbage collection function to clear out the zeroes. 
+			//this is why the bezierCurve kept throwing errors.
 			return data;
 		}, 
 		getLine: function(data, subreddit) {
