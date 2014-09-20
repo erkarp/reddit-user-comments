@@ -13,6 +13,7 @@
 		<div ng-app="chartjs-directive">
 		  <chart value="myChart"></chart>
 		</div>
+		<button ng-click="colorChart()">Respin</button>
 		<ul>
 			<li ng-repeat="sub in subreddits" style="background-color:{{sub.pointColor}}">{{sub.label}} ()</li>
 			<ul ng-repeat="sub in subreddits">

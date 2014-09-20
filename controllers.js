@@ -5,15 +5,17 @@ angular.module('controllers',[])
 		$scope.comments = array.data.data.children;
 		return PrepData.parse(array.data.data.children);
 	})
-	.then(function(data) {
-		//problem 1: was trying to save to $scope.myChart.data (bad documentation)
-		//problem 2: tried to treat a directive as a factory
-		//problem 3: hadn't injected chartjs-directive into MyApp definition
-		//problem 4: included <canvas> element where one was supposed to be created 
-		$scope.myChart = { "data": DrawChart.make(data), "options": { bezierCurve:false } };
-		$scope.subreddits = data.datasets;
-		console.log($scope.myChart);
+	.then(function(result) {
+		$scope.setData(result);
+		$scope.colorChart();
 	});
+	$scope.setData = function(data) {
+		$scope.data = data;
+		$scope.subreddits = $scope.data.datasets;
+	};
+	$scope.colorChart = function() {
+		$scope.myChart = { "data": DrawChart.make($scope.data), "options": { bezierCurve:false } };
+	};
 }]);
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
 		/* make big string

@@ -44,9 +44,6 @@ angular.module('services', [])
 					item.data.push(0);
 				});
 			} 
-			//every time a new monthYear is added, all the existing monthYears are missing arrays for it.
-			//could either fix this, or write a garbage collection function to clear out the zeroes. 
-			//this is why the bezierCurve kept throwing errors.
 			return data;
 		}, 
 		getLine: function(data, subreddit) {
