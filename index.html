@@ -1,0 +1,26 @@
+<html ng-app="MyApp">
+  <head>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+	<script src="js/randomColor.js"></script>
+	<script src="js/Chart.js"></script>
+	<script src="js/redditChart.js"></script>
+	<script src="js/chartjs-directive.js"></script>
+	<script src="js/controllers.js"></script>
+  </head>
+<body ng-controller="CloudController as cloud">
+	<div class="container">
+	<input type="text" ng-model="user"><button ng-click="createChart(user)">Go</button>
+		<div ng-app="chartjs-directive">
+		  <chart value="myChart"></chart>
+		</div>
+		<button ng-click="colorChart()" ng-show="data">Respin</button>
+		<ul>
+			<li ng-repeat="sub in subreddits" style="background-color:{{sub.pointColor}}">{{sub.label}} ()</li>
+			<ul ng-repeat="sub in subreddits">
+				<li></li>
+			</ul>
+		</ul>
+	</div>
+</body>
+</html>
