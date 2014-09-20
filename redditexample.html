@@ -5,17 +5,20 @@
 	<script src="randomColor.js"></script>
 	<script src="Chart.js"></script>
 	<script src="redditChart.js"></script>
+	<script src="chartjs-directive.js"></script>
 	<script src="controllers.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
-	<canvas id="chart" width="600" height="500"></canvas>
-	<ul>
-		<li ng-repeat="set in datasets" style="background-color:{{set.pointColor}}">{{set.label}} ()</li>
-		<ul ng-repeat="set in datasets">
-			<li></li>
+		<div ng-app="chartjs-directive">
+		  <chart value="myChart"></chart>
+		</div>
+		<ul>
+			<li ng-repeat="sub in subreddits" style="background-color:{{sub.pointColor}}">{{sub.label}} ()</li>
+			<ul ng-repeat="sub in subreddits">
+				<li></li>
+			</ul>
 		</ul>
-	</ul>
 	</div>
 </body>
 </html>

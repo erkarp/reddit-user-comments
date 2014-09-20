@@ -1,4 +1,4 @@
-angular.module('MyApp', ['controllers', 'services']);
+angular.module('MyApp', ['controllers', 'services', 'chartjs-directive']);
 
 angular.module('services', [])
 .factory('Comments', ['$http', function($http){
