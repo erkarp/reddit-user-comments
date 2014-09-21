@@ -9,6 +9,12 @@ body {
 .respin {
 	float: right;
 }
+#not-a-user {
+	padding: 10px;
+	border: 2px solid red;
+	border-radius: 5px;
+	margin: 20px 0;
+}
 canvas {
 	dispaly: block;
 }
@@ -34,7 +40,7 @@ ul ul {
 ul ul li {
 	display: block;
 	border-radius: 0;
-	background-color: #eee;
+	background-color: #ddd;
 	color: #111;
 	margin: 7px 5px;
 	padding: 5px;
@@ -55,7 +61,7 @@ ul ul li {
 p {
 	margin: 0 0 2px 0;
 	padding: 0;
-	:last-child {
+	&:last-child {
 		line-height: 1.8em; 
 	}
 }
@@ -69,4 +75,5 @@ p {
 	font-style: italic;
 	font-weight: lighter;
 	font-size: 12px;
+	text-decoration: none;
 }

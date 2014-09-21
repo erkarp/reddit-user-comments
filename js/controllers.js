@@ -1,5 +1,6 @@
 angular.module('controllers',[])
 .controller('CloudController', ['$scope','Comments','PrepData','DrawChart', function($scope, Comments, PrepData, DrawChart){
+	$scope.comments = true; 
 	
 	$scope.createChart = function(username) {
 		Comments.get(username)
@@ -13,8 +14,10 @@ angular.module('controllers',[])
 			$scope.colorChart();
 		});
 	};
+	
 	$scope.setData = function(data) {
 		$scope.data = data;
+		console.log(data);
 	};
 	$scope.colorChart = function() {
 		$scope.myChart = { "data": DrawChart.make($scope.data), "options": { bezierCurve:false,showTooltips:false } };

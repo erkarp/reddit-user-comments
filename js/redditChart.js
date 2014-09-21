@@ -27,8 +27,8 @@ angular.module('services', [])
 					data = this.addLine(data, comments[i].data.subreddit);
 				}
 				data = this.addDate(data, monthYear);
-				var line = this.getLine(data, comments[i].data.subreddit);
-				line[data.labels.indexOf(monthYear)]++;
+				var temp = this.getLine(data, comments[i].data.subreddit);
+				temp[data.labels.indexOf(monthYear)]++;
 			}
 			return data;
 		},	
@@ -38,9 +38,11 @@ angular.module('services', [])
 		},
 		addLine: function(data, subreddit) {
 			if (this.getLine(data, subreddit) == -1) {
-				data.datasets.push({ 
+				data.datasets.push(
+				{ 
 					label: subreddit, 
-					data: [0]
+					data: [0], 
+					total: 0
 				});
 			} return data;
 		},
@@ -55,6 +57,7 @@ angular.module('services', [])
 		getLine: function(data, subreddit) {
 			for (var i=0; i<data.datasets.length; i++) {
 				if (data.datasets[i].label == subreddit) {
+					data.datasets[i].total++;
 					return data.datasets[i].data;
 				}
 			} return -1;

@@ -11,23 +11,27 @@
 <body ng-controller="CloudController as cloud">
 	<div class="container">
 	
-		<p>www.reddit.com/u/<input type="text" ng-model="user">/ <button ng-click="createChart(user)">Go</button>
-		<button ng-click="colorChart()" ng-show="data" class="respin">Respin</button></p>
+		<p>www.reddit.com/u/<input type="text" ng-model="user">/ <button type="submit" ng-click="createChart(user)">Go</button>
+		<button ng-click="colorChart()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
+		<div ng-hide="comments" id="not-a-user">
+			<p><span ng-bind="user"></span> is not a reddit user. Please submit a valid username.</p>
+		</div>
 		
 		<div ng-app="chartjs-directive">
 		  <chart value="myChart"></chart>
 		</div>
 		
 		<ul>
-			<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ()</li>
+			<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ({{sub.total}})</li>
+			
 			<ul ng-repeat="sub in data.datasets">
 				<li ng-repeat="comment in comments">
 					<p>
-						<span style="background-color:{{comment.data.color}}" class="subreddit">{{comment.data.subreddit}}</span>
+						<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/"{{comment.data.subreddit}}>{{comment.data.subreddit}}</a></span>
 						<a href="{{comment.data.link_url}}">{{comment.data.link_title}}</a>
 						<span class="date">{{comment.data.posted}}</span>
 					</p>
-					<p>{{comment.data.body}}   <a class="perma" href="{{comment.data.link_url+comment.data.id}}">[permalink]</a></p>
+					<p>{{comment.data.body}}   <a class="perma" href="{{comment.data.link_url+comment.data.id}}">[link]</a></p>
 				</li>
 			</ul>
 		</ul>
