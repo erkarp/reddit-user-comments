@@ -2,11 +2,11 @@ angular.module('controllers',[])
 .controller('CloudController', ['$scope','Comments','PrepData','DrawChart', function($scope, Comments, PrepData, DrawChart){
 	
 	$scope.createChart = function(username) {
-		console.log(username);
 		Comments.get(username)
 		.then(function(array) {
-			$scope.comments = array.data.data.children;
-			return PrepData.parse(array.data.data.children);
+			console.log(array.data.data.children);
+			$scope.comments = Comments.dates(array.data.data.children);
+			return PrepData.parse($scope.comments);
 		})
 		.then(function(result) {
 			$scope.setData(result);
@@ -15,10 +15,10 @@ angular.module('controllers',[])
 	};
 	$scope.setData = function(data) {
 		$scope.data = data;
-		$scope.subreddits = $scope.data.datasets;
 	};
 	$scope.colorChart = function() {
-		$scope.myChart = { "data": DrawChart.make($scope.data), "options": { bezierCurve:false } };
+		$scope.myChart = { "data": DrawChart.make($scope.data), "options": { bezierCurve:false,showTooltips:false } };
+		//silly hacks: bezierCurve:false for error throwing; showTooltips:false for chart wonkiness on username change 
 	};
 }]);
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service

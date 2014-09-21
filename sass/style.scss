@@ -1,3 +1,14 @@
+body {
+	font-family: sans-serif;
+	font-size: 16px;
+}
+.container {
+	max-width:600px;
+	margin: 0 auto;
+}
+.respin {
+	float: right;
+}
 canvas {
 	dispaly: block;
 }
@@ -6,18 +17,56 @@ ul {
 	padding: 0;
 	display: flex;
 	flex-wrap: wrap;
+	font-weight: 100;
 }
-li {
+.subreddit {
 	display: inline-block;
 	background-color: #ccc;
 	color: #fff;
 	margin: 3px 7px;
 	padding: 3px;
+	border-radius: 5px;
 }
 ul ul {
 	display: block;
+	font-size: 13px;
 }
-.container {
-	max-width:600px;
-	margin: 0 auto;
+ul ul li {
+	display: block;
+	border-radius: 0;
+	background-color: #eee;
+	color: #111;
+	margin: 7px 5px;
+	padding: 5px;
+	overflow: scroll;
+	a {
+		color: inherit;
+		opacity: 0.8;
+	}
+	.subreddit {
+		color: #fff; 
+		border-radius: 1px;
+		padding: 0 2px;
+		margin: 0 1px;
+		//below to be removed later
+		color: inherit;
+	}
+}
+p {
+	margin: 0 0 2px 0;
+	padding: 0;
+	:last-child {
+		line-height: 1.8em; 
+	}
+}
+
+.date {
+	float: right;
+	font-style: italic;
+}
+.perma {
+	color: inherit;
+	font-style: italic;
+	font-weight: lighter;
+	font-size: 12px;
 }
