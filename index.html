@@ -27,7 +27,7 @@
 			<ul ng-repeat="sub in data.datasets">
 				<li ng-repeat="comment in comments">
 					<p>
-						<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/"{{comment.data.subreddit}}>{{comment.data.subreddit}}</a></span>
+						<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/{{comment.data.subreddit}}">{{comment.data.subreddit}}</a></span>
 						<a href="{{comment.data.link_url}}">{{comment.data.link_title}}</a>
 						<span class="date">{{comment.data.posted}}</span>
 					</p>
