@@ -3,9 +3,6 @@ angular.module('MyApp', ['controllers', 'services', 'chartjs-directive']);
 angular.module('services', [])
 .factory('Comments', ['$http', function($http){
 	return {
-		get: function(user){
-			return $http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100');
-		},	
 		dates: function(comments) {
 			for (var i = 0; i < comments.length; i++) {
 				comments[i].data.posted = this.dyMthYr(comments[i].data.created);
