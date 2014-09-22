@@ -21,20 +21,23 @@
 		  <chart value="myChart"></chart>
 		</div>
 		
-		<ul>
+		<ul ng-show="data&&comments" id="subreddits">
+			<li class="subreddit">all ({{comments.length}})</li>
 			<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ({{sub.total}})</li>
-			
-			<ul ng-repeat="sub in data.datasets">
-				<li ng-repeat="comment in comments">
-					<p>
-						<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/{{comment.data.subreddit}}">{{comment.data.subreddit}}</a></span>
-						<a href="{{comment.data.link_url}}">{{comment.data.link_title}}</a>
-						<span class="date">{{comment.data.posted}}</span>
-					</p>
-					<p>{{comment.data.body}}   <a class="perma" href="{{comment.data.link_url+comment.data.id}}">[link]</a></p>
-				</li>
-			</ul>
 		</ul>
+		<ul ng-show="data&&comments" id="comments">
+			<li ng-repeat="comment in comments" class="comment">
+				<p>
+					<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/{{comment.data.subreddit}}">{{comment.data.subreddit}}</a></span>
+					<a href="{{comment.data.link_url}}">{{comment.data.link_title}}</a>
+					<span class="date">{{comment.data.posted}}</span>
+				</p>
+				<p>{{comment.data.body}}   <a class="perma" href="{{comment.data.link_url+comment.data.id}}">[link]</a></p>
+			</li>
+		</ul>
+		<footer ng-show="data&&comments">
+			<p><a href="">Developed</a> with AngularJS, ChartJS, & SASS</p>
+		</footer>
 	</div>
 </body>
 </html>

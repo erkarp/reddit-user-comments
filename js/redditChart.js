@@ -24,7 +24,7 @@ angular.module('services', [])
 			for (var i=0; i<comments.length; i++) {
 				var monthYear = this.monthYr(comments[i].data.created);
 				if (i > 0) {
-					data = this.addLine(data, comments[i].data.subreddit);
+					data = this.addLine(data, comments[i].data.subreddit, false);
 				}
 				data = this.addDate(data, monthYear);
 				var temp = this.getLine(data, comments[i].data.subreddit);
@@ -37,7 +37,7 @@ angular.module('services', [])
 			return timestamp.getMonth() + " " + timestamp.getFullYear();
 		},
 		addLine: function(data, subreddit) {
-			if (this.getLine(data, subreddit) == -1) {
+			if (this.getLine(data, subreddit, true) == -1) {
 				data.datasets.push(
 				{ 
 					label: subreddit, 
@@ -53,11 +53,11 @@ angular.module('services', [])
 					item.data.push(0);
 				});
 			} return data;
-		}, 
-		getLine: function(data, subreddit) {
+		},
+		getLine: function(data, subreddit, addLine) {
 			for (var i=0; i<data.datasets.length; i++) {
 				if (data.datasets[i].label == subreddit) {
-					data.datasets[i].total++;
+					if (! addLine) { data.datasets[i].total++; }
 					return data.datasets[i].data;
 				}
 			} return -1;
