@@ -1,25 +1,35 @@
 angular.module('controllers',[])
 .controller('CloudController', ['$scope','$http','Comments','PrepData','DrawChart', function($scope, $http, Comments, PrepData, DrawChart){
-	$scope.comments = true; 
+	$scope.error = false; 
 	
 	$scope.createChart = function(user) {
+		$scope.error = false;
+		$scope.user = user; 
 		$http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
 		.then(function(array) {
 			$scope.comments = Comments.dates(array.data.data.children);
-			return PrepData.parse($scope.comments);
+			if ($scope.comments[11] !== undefined) {
+				return PrepData.parse($scope.comments);
+			} else { 
+				$scope.error = true;
+				$scope.message = 'orange';
+				return false;
+			}
 		})
 		.then(function(result) {
-			$scope.setData(result);
-			$scope.colorChart();
+			if (result) {
+				$scope.setData(result);
+				$scope.colorChart();
+			}
 		},
-        function () {
-			$scope.comments = false;
+        function (red) {
+			$scope.error = true;
+			$scope.message = 'red';
         });
 	};
 	
 	$scope.setData = function(data) {
 		$scope.data = data;
-		console.log(data);
 	};
 	$scope.colorChart = function() {
 		$scope.myChart = { "data": DrawChart.make($scope.data), "options": { bezierCurve:false,showTooltips:false } };
