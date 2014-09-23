@@ -1,5 +1,5 @@
 @mixin error-box($color) {
-	background-color: rgba($color, .9);
+	background-color: rgba($color, .15);
 	border-left: 7px solid $color;
 }
 
@@ -20,6 +20,9 @@ body {
 	margin: 20px 0;
 	&.orange { @include error-box(orange); } 
 	&.red { @include error-box(red); }
+	p {
+		margin: 10px 30px;
+	}
 }
 canvas {
 	dispaly: block;

@@ -51,10 +51,10 @@ angular.module('services', [])
 				});
 			} return data;
 		},
-		getLine: function(data, subreddit, addLine) {
+		getLine: function(data, subreddit, fromAddLine) { 
 			for (var i=0; i<data.datasets.length; i++) {
 				if (data.datasets[i].label == subreddit) {
-					if (! addLine) { data.datasets[i].total++; }
+					if (! fromAddLine) { data.datasets[i].total++; }
 					return data.datasets[i].data;
 				}
 			} return -1;

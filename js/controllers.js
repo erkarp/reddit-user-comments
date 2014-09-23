@@ -1,10 +1,11 @@
 angular.module('controllers',[])
 .controller('CloudController', ['$scope','$http','Comments','PrepData','DrawChart', function($scope, $http, Comments, PrepData, DrawChart){
-	$scope.error = false; 
 	
 	$scope.createChart = function(user) {
+		$scope.comments = false; 
 		$scope.error = false;
 		$scope.user = user; 
+		
 		$http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
 		.then(function(array) {
 			$scope.comments = Comments.dates(array.data.data.children);
