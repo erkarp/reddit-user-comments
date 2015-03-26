@@ -16,18 +16,7 @@
 		<p>www.reddit.com/u/<input type="text" ng-model="username">/ <button type="submit" ng-click="createChart(username)">Go</button>
 		<button ng-click="colorChart()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
 		
-		<aside ng-show="error" ng-switch="message">
-			<div ng-switch-when="red" class="not-a-user red">
-				<p>{{user}} is not a reddit user. Please submit a valid username.</p>
-			</div>
-			<div ng-switch-when="orange" class="not-a-user orange">
-				<p>{{user}} hasn't submitted enough comments to graph!</p>
-			</div>
-		</aside>
-		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}" badUser="{{bad-username}}">
-			<p>showing error</p>
-			<p>{{message}}</p>
-		</error>
+		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 		
 		<main ng-show="data&&comments&&!error">
 			<div ng-app="chartjs-directive">

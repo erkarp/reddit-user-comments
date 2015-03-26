@@ -1,11 +1,11 @@
 app.directive('error', function () {
     return {
       restrict: 'E',
-	  template: '<p>{{message}}</p>',
+	  transclude: true,
+	  template: '<p>{{$parent.user}} {{message}}</p>',
       scope: {
         errorClass: '=error',
-		badUser: '=username',
-		message: '@'
+		message: '@',
       },
       link: function (scope, element, attrs) {
 		  
@@ -13,9 +13,9 @@ app.directive('error', function () {
 		  
 		  function checkError() {
 			  if (scope.errorClass === 'red') {
-				  return scope.badUser+' is not a reddit user. Please submit a valid username.';
+				  return ' is not a reddit user. Please submit a valid username.';
 			  } else if (scope.errorClass === 'orange') {
-				  return scope.badUser+' hasn\'t submitted enough comments to graph!';
+				  return ' hasn\'t submitted enough comments to graph!';
 			  } else {
 				  return ''; 
 			  }  
