@@ -7,6 +7,7 @@
 	<script src="js/Chart.js"></script>
 	<script src="js/redditChart.js"></script>
 	<script src="js/chartjs-directive.js"></script>
+	<script src="js/error-directive.js"></script>
 	<script src="js/controllers.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
@@ -23,7 +24,8 @@
 				<p>{{user}} hasn't submitted enough comments to graph!</p>
 			</div>
 		</aside>
-		<error ng-hide="errorClass" ng-class="{{errorClass}}" badUser="{{bad-username}}">
+		<error ng-show="errorClass" ng-class="{{'errorClass'}}" badUser="{{bad-username}}">
+			<p>showing error</p>
 			<p>{{message}}</p>
 		</error>
 		

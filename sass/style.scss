@@ -14,12 +14,16 @@ body {
 .respin {
 	float: right;
 }
-.not-a-user {
+error {
 	padding: 10px;
 	border-radius: 2px;
 	margin: 20px 0;
-	&.orange { @include error-box(orange); } 
-	&.red { @include error-box(red); }
+	&.orange { 
+		@include error-box(orange); 
+	} 
+	&.red { 
+		@include error-box(red); 
+	}
 	p {
 		margin: 10px 30px;
 	}

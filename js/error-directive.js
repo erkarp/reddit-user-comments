@@ -2,16 +2,31 @@ app.directive('error', function () {
     return {
       restrict: 'E',
       scope: {
-        errorClass: '=ng-hide',
-		badUser: '='
+        errorClass: '=class',
+		badUser: '=username',
+		message: '&'
       },
       link: function (scope, element, attrs) {
 		  
-		  if (scope.errorClass === 'red') {
-			  var message: scope.badUser+'is not a reddit user. Please submit a valid username.';
-		  } else if (scope.errorClass === 'orange') {
-			  var message: scope.badUser+'hasn\'t submitted enough comments to graph!';
+		  console.dir(scope);
+		  
+		  function checkError() {
+			  if (scope.errorClass === 'red') {
+				  return scope.badUser+'is not a reddit user. Please submit a valid username.';
+			  } else if (scope.errorClass === 'orange') {
+				  return scope.badUser+'hasn\'t submitted enough comments to graph!';
+			  } else {
+				  return ''; 
+			  }  
 		  }
+		
+		  scope.message = checkError();
+
+        //Update when data changes
+        scope.$watch(function() { return scope.errorClass; }, function(value) {
+			if(!value) return;
+			scope.message = checkError();
+        });
 		  
       }
     };
