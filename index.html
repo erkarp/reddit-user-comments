@@ -23,6 +23,9 @@
 				<p>{{user}} hasn't submitted enough comments to graph!</p>
 			</div>
 		</aside>
+		<error ng-hide="errorClass" ng-class="{{errorClass}}" badUser="{{bad-username}}">
+			<p>{{message}}</p>
+		</error>
 		
 		<main ng-show="data&&comments&&!error">
 			<div ng-app="chartjs-directive">
