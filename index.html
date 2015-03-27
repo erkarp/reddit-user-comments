@@ -6,6 +6,7 @@
 	<script src="js/randomColor.js"></script>
 	<script src="js/Chart.js"></script>
 	<script src="js/redditChart.js"></script>
+	<script src="js/comment-directive.js"></script>
 	<script src="js/chartjs-directive.js"></script>
 	<script src="js/error-directive.js"></script>
 	<script src="js/controllers.js"></script>
@@ -29,13 +30,8 @@
 			</ul>
 
 			<ul id="comments">
-				<li ng-repeat="comment in comments" class="comment">
-					<p>
-						<span style="background-color:{{comment.data.color}}" class="subreddit"><a href="http://www.reddit.com/r/{{comment.data.subreddit}}">{{comment.data.subreddit}}:</a></span>
-						<a href="{{comment.data.link_url}}">{{comment.data.link_title}}</a>
-						<span class="date">{{comment.data.posted}}</span>
-					</p>
-					<p>{{comment.data.body}}   <a class="perma" href="{{comment.data.link_url+comment.data.id}}">[link]</a></p>
+				<li ng-repeat="comment in comments">
+					<div comment class="comment" info="comment.data"></div>
 				</li>
 			</ul>
 			<footer ng-show="data&&comments&&!error">
