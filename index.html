@@ -26,16 +26,17 @@
 
 			<ul id="subreddits">
 				<li class="subreddit">all ({{comments.length}})</li>
-				<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ({{sub.total}})</li>
+				<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ({{sub.total}}</li>
 			</ul>
 
 			<ul id="comments">
 				<li comment ng-repeat="comment in comments" class="comment" info="comment.data"></li>
 			</ul>
-			<footer ng-show="data&&comments&&!error">
-				<p><a href="">Developed</a> with AngularJS, ChartJS, & SASS</p>
-			</footer>
 		</main>
+		
+		<footer ng-show="data&&comments&&!errorClass">
+			<p><a href="https://www.emilykarp.com">Emily Karp</a></p>
+		</footer>
 	</div>
 </body>
 </html>
