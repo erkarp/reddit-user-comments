@@ -7,6 +7,7 @@
 	<script src="js/Chart.js"></script>
 	<script src="js/redditChart.js"></script>
 	<script src="js/comment-directive.js"></script>
+	<script src="js/subreddit-directive.js"></script>
 	<script src="js/chartjs-directive.js"></script>
 	<script src="js/error-directive.js"></script>
 	<script src="js/controllers.js"></script>
@@ -25,12 +26,12 @@
 			</div>
 
 			<ul id="subreddits">
-				<li class="subreddit">all ({{comments.length}})</li>
-				<li ng-repeat="sub in data.datasets" style="background-color:{{sub.pointColor}}" class="subreddit">{{sub.label}} ({{sub.total}})</li>
+				<li sub class="subreddit" info="{label: 'all', total: comments.length}"></li>
+				<li sub class="subreddit" info="sub" ng-repeat="sub in data.datasets"></li>
 			</ul>
 
 			<ul id="comments">
-				<li comment ng-repeat="comment in comments" class="comment" info="comment.data"></li>
+				<li comment class="comment" info="comment.data" ng-repeat="comment in comments"></li>
 			</ul>
 			<footer ng-show="data&&comments&&!error">
 				<p><a href="">Developed</a> with AngularJS, ChartJS, & SASS</p>
