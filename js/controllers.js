@@ -1,4 +1,4 @@
-app.controller('CloudController', ['$scope','$http','Comments','PrepData','DrawChart', function($scope, $http, Comments, PrepData, DrawChart){
+app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', function($scope, $http, PrepData, DrawChart){
 	
 	$scope.createChart = function(user) {
 		$scope.comments = false; 
@@ -7,7 +7,8 @@ app.controller('CloudController', ['$scope','$http','Comments','PrepData','DrawC
 		
 		$http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
 		.then(function(array) {
-			$scope.comments = Comments.dates(array.data.data.children);
+			$scope.comments = array.data.data.children;
+			
 			if ($scope.comments[11] !== undefined) {
 				$scope.errorClass = false;
 				return PrepData.parse($scope.comments);

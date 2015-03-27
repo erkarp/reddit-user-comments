@@ -1,20 +1,6 @@
 var app = angular.module('MyApp', ['chartjs-directive']);
 
-
-app.factory('Comments', ['$http', function($http){
-	return {
-		dates: function(comments) {
-			for (var i = 0; i < comments.length; i++) {
-				comments[i].data.posted = this.dyMthYr(comments[i].data.created);
-			} return comments;
-		},	
-		dyMthYr: function(created) {
-			var timestamp = new Date(created * 1000);
-			return timestamp.getDate() + "/" + timestamp.getMonth() + "/" + timestamp.getFullYear();
-		}
-	};
-}])
-.factory('PrepData', [function() {
+app.factory('PrepData', [function() {
 	return {
 		parse: function(comments) {
 			var data = { labels: [], datasets: [] };
