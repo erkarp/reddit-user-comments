@@ -30,9 +30,7 @@
 			</ul>
 
 			<ul id="comments">
-				<li ng-repeat="comment in comments">
-					<div comment class="comment" info="comment.data"></div>
-				</li>
+				<li comment ng-repeat="comment in comments" class="comment" info="comment.data"></li>
 			</ul>
 			<footer ng-show="data&&comments&&!error">
 				<p><a href="">Developed</a> with AngularJS, ChartJS, & SASS</p>
