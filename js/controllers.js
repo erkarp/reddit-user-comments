@@ -9,7 +9,7 @@ app.controller('CloudController', ['$scope','$http','Comments','PrepData','DrawC
 		.then(function(array) {
 			$scope.comments = Comments.dates(array.data.data.children);
 			if ($scope.comments[11] !== undefined) {
-				$scope.errorClass = '';
+				$scope.errorClass = false;
 				return PrepData.parse($scope.comments);
 			} else { 
 				$scope.errorClass = 'orange';
