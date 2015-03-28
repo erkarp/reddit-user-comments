@@ -9,6 +9,11 @@ app.directive('sub', function () {
         
         attrs.$set('style', 'background-color:' + scope.subData.pointColor);
         
+		  
+		scope.$watch(function() { return scope.subData.pointColor; }, function(value) {
+			attrs.$set('style', 'background-color:' + scope.subData.pointColor);
+		});
+        
       }
     };  
   });
