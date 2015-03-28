@@ -1,12 +1,14 @@
 app.directive('sub', function () {
     return {
       restrict: 'A',
-	  template: '<span style="background-color:{{subData.pointColor}}"><a href="{{link}}">{{subData.label}} ({{subData.total}})</a></span>',
+	  template: '{{subData.label}} ({{subData.total}})',
       scope: {
         subData: '=info'
       },
       link: function (scope, element, attrs) {
-          
+        
+        attrs.$set('style', 'background-color:' + scope.subData.pointColor);
+        
       }
-    };
+    };  
   });
