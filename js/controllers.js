@@ -1,10 +1,11 @@
-app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', function($scope, $http, PrepData, DrawChart){
+app.controller('CloudController', ['$scope','Comments','PrepData','DrawChart', function($scope, Comments, PrepData, DrawChart){
 	
 	$scope.createChart = function(user) {
 		$scope.comments = false; 
 		$scope.errorClass = false;
-		$scope.user = user; 
+	//	$scope.user = user; 
 		
+      /*
 		$http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
 		.then(function(array) {
 			$scope.comments = array.data.data.children;
@@ -25,6 +26,14 @@ app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', func
 		},
         function (red) {
 			$scope.errorClass = 'red';
+        }); */
+      
+        Comments.async(user)
+        .then(function(response) {
+          console.log(response);
+          $scope.comments = response;
+          var prep = PrepData.parse($scope.comments);
+          $scope.setData(prep);
         });
 	};
 	
