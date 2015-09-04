@@ -11,9 +11,7 @@ app.directive('comment', function () {
 
 		for (var i = 0; i<scope.colorData.length; i++) {
 			if (scope.colorData[i].label == scope.commentData.subreddit) {
-				element.css({
-					backgroundColor:  scope.colorData[i].pointColor
-				}); 
+				scope.commentData.subColor = scope.colorData[i].pointColor
 				break;
 			}
 		}
