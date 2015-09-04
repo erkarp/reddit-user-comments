@@ -1,9 +1,1 @@
-app.directive('comment', function () {
-    return {
-      restrict: 'A',
-	  templateUrl: 'comment.html',
-      scope: {
-        commentData: '=info'
-      }
-    };
-  });
+﻿app.directive('comment', function () {    return {      restrict: 'A',	  templateUrl: 'comment.html',      scope: {        colorData: '=color',        commentData: '=info'      },      link: function (scope, element, attrs) {                attrs.$set('style', 'background-color:' + scope.colorData);        console.log(colorData);          }    };  });
