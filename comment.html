@@ -2,7 +2,7 @@
 	<span style="background-color:{{commentData.subColor}}" class="subreddit">
 		<a href="http://www.reddit.com/r/{{commentData.subreddit}}">{{commentData.subreddit}}:</a>
 	</span>
-	<a href="{{commentData.link_url}}">{{commentData.link_title}}</a>
 	<span class="date">{{commentData.created*1000 | date}}</span>
+	<a class="post" href="{{commentData.link_url}}">{{commentData.link_title}}</a>
 </p>
 <p>{{commentData.body}}   <a class="perma" href="{{commentData.link_url+commentData.id}}">→</a></p>

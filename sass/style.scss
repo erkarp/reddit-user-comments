@@ -14,6 +14,9 @@ body {
 .respin {
 	float: right;
 }
+canvas {
+	dispaly: block;
+}
 error {
 	display: block;
 	padding: 10px;
@@ -29,9 +32,6 @@ error {
 		margin: 10px 30px;
 	}
 }
-canvas {
-	dispaly: block;
-}
 ul#subreddits, ul#comments { 
 	list-style: none; 
 	padding: 0;
@@ -43,25 +43,29 @@ ul#subreddits, ul#comments {
 	display: inline-block;
 	background-color: #ccc;
 	color: #fff;
-	margin: 3px 7px;
-	padding: 3px;
-	border-radius: 5px;
+	margin: 3px;
+	padding: 4px 6px 3px;
+	border-radius: 1px;
 }
 ul#comments {
 	display: block;
-	font-size: 13px;
+	font-size: 14px;
 }
 .comment {
 	display: block;
 	border-radius: 0;
-	background-color: #ddd;
-	color: #111;
+	background-color: #F5F3F3;
+	color: #222;
 	margin: 7px 5px;
 	padding: 5px;
 	overflow: scroll;
 	a {
-		color: inherit;
-		opacity: 0.8;
+		color: #fff;
+		line-height: 1.6em;
+		text-decoration: none;
+		&.post {
+			color: #3B79B7;
+		}
 	}
 	.subreddit {
 		color: #fff; 
@@ -72,6 +76,7 @@ ul#comments {
 		color: inherit;
 	}
 }
+
 p {
 	margin: 0 0 2px 0;
 	padding: 0;
