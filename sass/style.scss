@@ -32,25 +32,32 @@ error {
 		margin: 10px 30px;
 	}
 }
-ul#subreddits, ul#comments { 
+menu, ul#comments { 
 	list-style: none; 
 	padding: 0;
 	display: flex;
 	flex-wrap: wrap;
+    justify-content: center;
 	font-weight: 100;
 }
+
 .subreddit {
 	display: inline-block;
 	background-color: #ccc;
-	color: #fff;
+    border: 0;
 	margin: 3px;
 	padding: 4px 6px 3px;
 	border-radius: 1px;
+	color: #fff;
+    font-size: 16px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 }
+
 ul#comments {
 	display: block;
 	font-size: 14px;
 }
+
 .comment {
 	display: block;
 	border-radius: 0;
@@ -68,12 +75,8 @@ ul#comments {
 		}
 	}
 	.subreddit {
-		color: #fff; 
-		border-radius: 1px;
-		padding: 0 2px;
-		margin: 0 1px;
-		//below to be removed later
-		color: inherit;
+		padding: 2px 5px 0;
+		margin: 0 1px 0 0;
 	}
 }
 

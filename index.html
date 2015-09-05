@@ -22,13 +22,13 @@
 		
 		<main ng-show="data&&comments&&!errorClass">
 			<div ng-app="chartjs-directive">
-			  <chart value="myChart"></chart>
+				<chart value="myChart"></chart>
 			</div>
 
-			<ul id="subreddits">
-				<li sub class="subreddit" info="{label: 'all', total: comments.length}"></li>
-				<li sub class="subreddit" info="sub" ng-repeat="sub in data.datasets"></li>
-			</ul>
+			<menu>
+				<button sub class="subreddit" info="{label: 'all', total: comments.length}"></button>
+				<button sub class="subreddit" info="sub" ng-repeat="sub in data.datasets"></button>
+			</menu>
 
 			<ul id="comments">
 				<li comment class="comment" info="comment.data" color="myChart.data.datasets" ng-repeat="comment in comments"></li>
