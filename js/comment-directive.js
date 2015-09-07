@@ -15,6 +15,8 @@ app.directive('comment', function () {
 				break;
 			}
 		}
+		  
+		  
     
       }
     };

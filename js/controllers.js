@@ -1,4 +1,10 @@
 app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', function($scope, $http, PrepData, DrawChart){
+
+	$scope.chosenSub = 'all';
+	
+	$scope.setSub = function(sub) {
+		$scope.chosenSub = sub;
+	};
 	
 	$scope.createChart = function(user) {
 		$scope.comments = false; 
@@ -47,4 +53,3 @@ app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', func
 		/* make big string
 		array.data.data.children.reduce(function(prev, comment){
 				return prev += comment.data.body;
-			}, '');	*/
