@@ -11,6 +11,7 @@
 	<script src="js/chartjs-directive.js"></script>
 	<script src="js/error-directive.js"></script>
 	<script src="js/controllers.js"></script>
+	<script src="js/sub-filter.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
@@ -26,12 +27,12 @@
 			</div>
 
 			<ul id="subreddits">
-				<li sub class="subreddit" info="{label: 'all', total: comments.length}"></li>
-				<li sub class="subreddit" info="sub" ng-repeat="sub in data.datasets"></li>
+				<li sub class="subreddit" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></li>
+				<li sub class="subreddit" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></li>
 			</ul>
 
 			<ul id="comments">
-				<li comment class="comment" info="comment.data" color="myChart.data.datasets" ng-repeat="comment in comments"></li>
+				<li comment class="comment" info="comment.data" color="myChart.data.datasets" ng-repeat="comment in comments | subChoice:chosenSub"></li>
 			</ul>
 		</main>
 		
