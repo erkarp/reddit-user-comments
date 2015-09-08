@@ -1,0 +1,25 @@
+menu, ul#comments { 
+	list-style: none; 
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: center;
+	font-weight: 100;
+}
+
+.subreddit {
+	display: inline-block;
+	background-color: #ccc;
+    border: 0;
+	margin: 3px;
+	padding: 4px 6px 3px;
+	border-radius: 1px;
+	color: #fff;
+    font-size: 16px;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+	opacity: .2;
+}
+
+.subreddit.active {
+	opacity: 1;
+}

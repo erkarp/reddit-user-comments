@@ -1,6 +1,11 @@
-app.controller('CloudController', ['$scope','Comments','PrepData','DrawChart', function($scope, Comments, PrepData, DrawChart){
+app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','DrawChart', function($rootScope, $scope, $http, PrepData, DrawChart){
+	
+	$scope.setSub = function(sub) {
+		$rootScope.chosenSub = sub;
+	};
 	
 	$scope.createChart = function(user) {
+		$rootScope.chosenSub = 'all'; 
 		$scope.comments = false; 
 		$scope.errorClass = false;
 	//	$scope.user = user; 
@@ -20,6 +25,7 @@ app.controller('CloudController', ['$scope','Comments','PrepData','DrawChart', f
 		})
 		.then(function(result) {
 			if (result) {
+                console.dir(result);
 				$scope.setData(result);
 				$scope.colorChart();
 			}
@@ -54,5 +60,4 @@ app.controller('CloudController', ['$scope','Comments','PrepData','DrawChart', f
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
 		/* make big string
 		array.data.data.children.reduce(function(prev, comment){
-				return prev += comment.data.body;
-			}, '');	*/
+				return prev += comment.data.body; */
