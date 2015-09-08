@@ -7,15 +7,21 @@ app.directive('comment', function () {
         commentData: '=info'
       },
       link: function (scope, element, attrs) {
-		var color = ''; 
-
-		for (var i = 0; i<scope.colorData.length; i++) {
-			if (scope.colorData[i].label == scope.commentData.subreddit) {
-				scope.commentData.subColor = scope.colorData[i].pointColor;
-				break;
-			}
-		}
 		  
+			function setCommentLabelColors() {
+				for (var i = 0; i<scope.colorData.length; i++) {
+					if (scope.colorData[i].label == scope.commentData.subreddit) {
+						scope.commentData.subColor = scope.colorData[i].pointColor;
+						break;
+					}
+				}
+			};
+		  	
+		  	setCommentLabelColors();
+
+			scope.$watch(function() { return scope.colorData[0].pointColor; }, function(value) {
+				setCommentLabelColors();
+			});
 		  
     
       }

@@ -7,6 +7,7 @@ app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', func
 	};
 	
 	$scope.createChart = function(user) {
+		$scope.chosenSub 
 		$scope.comments = false; 
 		$scope.errorClass = false;
 		$scope.user = user; 
@@ -52,4 +53,4 @@ app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', func
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
 		/* make big string
 		array.data.data.children.reduce(function(prev, comment){
-				return prev += comment.data.body;
+				return prev += comment.data.body; */
