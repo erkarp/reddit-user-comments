@@ -17,4 +17,9 @@ menu, ul#comments {
 	color: #fff;
     font-size: 16px;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+	opacity: .2;
+}
+
+.subreddit.active {
+	opacity: 1;
 }

@@ -1,13 +1,12 @@
-app.controller('CloudController', ['$scope','$http','PrepData','DrawChart', function($scope, $http, PrepData, DrawChart){
-
-	$scope.chosenSub = 'all';
+app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','DrawChart', function($rootScope, $scope, $http, PrepData, DrawChart){
 	
 	$scope.setSub = function(sub) {
-		$scope.chosenSub = sub;
+		$rootScope.chosenSub = sub;
 	};
 	
+	
 	$scope.createChart = function(user) {
-		$scope.chosenSub 
+		$rootScope.chosenSub = 'all'; 
 		$scope.comments = false; 
 		$scope.errorClass = false;
 		$scope.user = user; 

@@ -27,8 +27,8 @@
 			</div>
 
 			<menu>
-				<button sub class="subreddit" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
-				<button sub class="subreddit" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
+				<button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
+				<button sub class="subreddit active" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
 			</menu>
 
 			<ul id="comments">

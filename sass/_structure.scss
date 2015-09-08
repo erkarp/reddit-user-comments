@@ -15,22 +15,8 @@ body {
 	float: right;
 }
 canvas {
-	dispaly: block;
-}
-error {
 	display: block;
-	padding: 10px;
-	border-radius: 2px;
-	margin: 20px 0;
-	&.orange { 
-		@include error-box(orange); 
-	} 
-	&.red { 
-		@include error-box(red); 
-	}
-	p {
-		margin: 10px 30px;
-	}
+	max-width: 100%;
 }
 
 footer {
