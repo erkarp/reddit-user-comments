@@ -14,14 +14,9 @@ app.directive('sub', function ($rootScope) {
 		});
 		  
 		scope.$watch(function() { return $rootScope.chosenSub }, function(value) {
-			console.log(scope.subData.label, value);
-			if (scope.subData.label == value || value == 'all') {
-				console.log('YAAS');
-				element.addClass('active');
-			} else {
-				console.log('NERP');
-				element.removeClass('active');
-			}
+			scope.subData.label == value || value == 'all' 
+				? element.addClass('active')
+				: element.removeClass('active');
 		});
         
       }

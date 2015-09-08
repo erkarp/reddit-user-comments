@@ -3,12 +3,18 @@ var app = angular.module('MyApp', ['chartjs-directive']);
 app.factory('PrepData', [function() {
 	return {
 		parse: function(comments) {
-			var data = { labels: [], datasets: [] };
+			var data = { 
+				labels: [], 
+				datasets: [] 
+			};
+			
 			for (var i=0; i<comments.length; i++) {
+				
 				var monthYear = this.monthYr(comments[i].data.created);
 				if (i > 0) {
 					data = this.addLine(data, comments[i].data.subreddit, false);
 				}
+				
 				data = this.addDate(data, monthYear);
 				var temp = this.getLine(data, comments[i].data.subreddit);
 				temp[data.labels.indexOf(monthYear)]++;
@@ -23,8 +29,7 @@ app.factory('PrepData', [function() {
 		
 		addLine: function(data, subreddit) {
 			if (this.getLine(data, subreddit, true) == -1) {
-				data.datasets.push(
-				{ 
+				data.datasets.push({ 
 					label: subreddit, 
 					data: [0], 
 					total: 0
@@ -35,6 +40,7 @@ app.factory('PrepData', [function() {
 		addDate: function(data, monthYear) {
 			if (data.labels.indexOf(monthYear) == -1) {
 				data.labels.push(monthYear);
+				
 				data.datasets.forEach(function(item){
 					item.data.push(0);
 				});
@@ -44,7 +50,9 @@ app.factory('PrepData', [function() {
 		getLine: function(data, subreddit, fromAddLine) { 
 			for (var i=0; i<data.datasets.length; i++) {
 				if (data.datasets[i].label == subreddit) {
-					if (! fromAddLine) { data.datasets[i].total++; }
+					if (! fromAddLine) { 
+						data.datasets[i].total++; 
+					}
 					return data.datasets[i].data;
 				}
 			} return -1;
@@ -55,11 +63,15 @@ app.factory('PrepData', [function() {
 	return {
 		make: function(data){
 			for (var i=0; i<data.datasets.length; i++) {
-				var col = randomColor({ luminosity: 'bright', format: 'rgb' });
+				var col = randomColor({ 
+					luminosity: 'bright', 
+					format: 'rgb' 
+				});
 				data.datasets[i] = this.color(data.datasets[i], col);
 			}	
 			return data;
 		},
+		
 		color: function(dataset, col) {
 			dataset.fillColor = "rgba(0,0,0,0)";
 			dataset.strokeColor = col;
