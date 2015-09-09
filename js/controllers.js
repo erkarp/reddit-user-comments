@@ -8,33 +8,26 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart
 		$rootScope.chosenSub = 'all'; 
 		$scope.comments = false; 
 		$scope.errorClass = false;
+		$scope.user = user;
 		
 		Comments.async(user)
 		.then(function(response) {
+			
+			if (response[11] == undefined) { 
+				$scope.errorClass = 'orange';
+				return;
+			}
+				
+			$scope.errorClass = false;
 			$scope.comments = response;
 			
-			if ($scope.comments[11] !== undefined) {
-				$scope.errorClass = false;
-				return PrepData.parse($scope.comments);
-			} else { 
-				$scope.errorClass = 'orange';
-				return false;
-			}
-		})
-		.then(function(result) {
-			if (result) {
-                console.dir(result);
-				$scope.setData(result);
-				$scope.colorChart();
-			}
+			$scope.data = PrepData.parse(response);
+			$scope.colorChart();
+				
 		},
         function (red) {
 			$scope.errorClass = 'red';
         }); 
-	};
-
-	$scope.setData = function(data) {
-		$scope.data = data;
 	};
 	
 	$scope.colorChart = function() {

@@ -12,7 +12,8 @@ app.filter('subChoice', function () {
         out.push(comment);
       }
     })
-	
+	console.log(out);
+
     return out;
   }
 	
