@@ -1,4 +1,4 @@
-app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','DrawChart', function($rootScope, $scope, $http, PrepData, DrawChart){
+app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, $http, PrepData, DrawChart, Comments){
 	
 	$scope.setSub = function(sub) {
 		$rootScope.chosenSub = sub;
@@ -40,6 +40,7 @@ app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','D
           $scope.comments = response;
           var prep = PrepData.parse($scope.comments);
           $scope.setData(prep);
+		  $scope.colorChart();
         });
 	};
 	
