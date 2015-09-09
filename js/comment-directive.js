@@ -21,11 +21,14 @@ app.directive('comment', function () {
 				}
 			};
 
-			scope.$watch(function() { return scope.colorData[0].pointColor }, 
+			scope.$watch(function() { 
+				if (scope.colorData) {
+					return scope.colorData[0].pointColor;
+				}
+			}, 
 			function(value) {
 				setCommentLabelColors();
 			});
-		  
     
       }
     };

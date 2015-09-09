@@ -33,7 +33,6 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart
         }); 
 	};
 
-	
 	$scope.setData = function(data) {
 		$scope.data = data;
 	};
