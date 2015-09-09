@@ -1,4 +1,4 @@
-app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, $http, PrepData, DrawChart, Comments){
+app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, PrepData, DrawChart, Comments){
 	
 	$scope.setSub = function(sub) {
 		$rootScope.chosenSub = sub;
@@ -8,12 +8,10 @@ app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','D
 		$rootScope.chosenSub = 'all'; 
 		$scope.comments = false; 
 		$scope.errorClass = false;
-	//	$scope.user = user; 
 		
-      /*
-		$http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
-		.then(function(array) {
-			$scope.comments = array.data.data.children;
+		Comments.async(user)
+		.then(function(response) {
+			$scope.comments = response;
 			
 			if ($scope.comments[11] !== undefined) {
 				$scope.errorClass = false;
@@ -32,17 +30,9 @@ app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','D
 		},
         function (red) {
 			$scope.errorClass = 'red';
-        }); */
-      
-        Comments.async(user)
-        .then(function(response) {
-          console.log(response);
-          $scope.comments = response;
-          var prep = PrepData.parse($scope.comments);
-          $scope.setData(prep);
-		  $scope.colorChart();
-        });
+        }); 
 	};
+
 	
 	$scope.setData = function(data) {
 		$scope.data = data;
@@ -58,7 +48,5 @@ app.controller('CloudController', ['$rootScope', '$scope','$http', 'PrepData','D
 		};
 	};
 }]);
+
 //http://stackoverflow.com/questions/13937318/convert-angular-http-get-function-to-a-service
-		/* make big string
-		array.data.data.children.reduce(function(prev, comment){
-				return prev += comment.data.body; */
