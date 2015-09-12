@@ -3,6 +3,7 @@
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 	<script src="js/randomColor.js"></script>
 	<script src="js/Chart.js"></script>
 	<script src="js/redditChart.js"></script>
@@ -10,6 +11,7 @@
 	<script src="js/comment-directive.js"></script>
 	<script src="js/subreddit-directive.js"></script>
 	<script src="js/chartjs-directive.js"></script>
+	<script src="js/graph-directive.js"></script>
 	<script src="js/error-directive.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/sub-filter.js"></script>
@@ -23,6 +25,8 @@
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 		
 		<main ng-show="data&&comments&&!errorClass">
+			<graph></graph>
+		
 			<div ng-app="chartjs-directive">
 				<chart value="myChart"></chart>
 			</div>
