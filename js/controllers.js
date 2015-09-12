@@ -11,17 +11,17 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart
 		$scope.user = user;
 		
 		Comments.async(user)
-		.then(function(response) {
+		.then(function(result) {
 			
-			if (response[11] == undefined) { 
+			if (result[11] == undefined) { 
 				$scope.errorClass = 'orange';
 				return;
 			}
 				
 			$scope.errorClass = false;
-			$scope.comments = response;
+			$scope.comments = result;
 			
-			$scope.data = PrepData.parse(response);
+			$scope.data = PrepData.parse(result);
 			$scope.colorChart();
 				
 		},

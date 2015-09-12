@@ -11,8 +11,7 @@ app.filter('subChoice', function () {
       if(comment.data.subreddit === chosenSub){
         out.push(comment);
       }
-    })
-	console.log(out);
+    });
 
     return out;
   }
