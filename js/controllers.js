@@ -22,6 +22,7 @@ app.controller('CloudController', ['$rootScope', '$scope', 'Graph', 'PrepData','
 			$scope.comments = result;
 			
 			Graph.getSubLines($scope.comments);
+			Graph.getXAxis($scope.comments);
 			
 			$scope.data = PrepData.parse(result);
 			$scope.colorChart();
