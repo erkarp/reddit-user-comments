@@ -38,7 +38,8 @@ app.factory('Graph', function() {
 			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 			
 			var month = months[timestamp.getMonth()];
-			return month + " " + timestamp.getFullYear();
+			var year = timestamp.getFullYear().toString();
+			return month.substr(0,3) + " '" + year.substr(2);
 		}
 
 	}

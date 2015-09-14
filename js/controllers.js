@@ -1,4 +1,4 @@
-app.controller('CloudController', ['$rootScope', '$scope', 'Graph', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, Graph, PrepData, DrawChart, Comments){
+app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, PrepData, DrawChart, Comments){
 	
 	$scope.setSub = function(sub) {
 		$rootScope.chosenSub = sub;
@@ -20,9 +20,6 @@ app.controller('CloudController', ['$rootScope', '$scope', 'Graph', 'PrepData','
 				
 			$scope.errorClass = false;
 			$scope.comments = result;
-			
-			Graph.getSubLines($scope.comments);
-			Graph.getXAxis($scope.comments);
 			
 			$scope.data = PrepData.parse(result);
 			$scope.colorChart();
