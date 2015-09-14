@@ -18,8 +18,15 @@ menu, ul#comments {
     font-size: 16px;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 	opacity: .2;
-}
-
-.subreddit.active {
-	opacity: 1;
+	/*
+	:focus {
+		outline: none; 
+	}
+	:hover {
+		opacity: .5; 
+	}
+	*/
+	.active {
+		opacity: 1;
+	}
 }

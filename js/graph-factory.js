@@ -11,35 +11,29 @@ app.factory('Graph', function() {
 				}
 				subredditLines[subreddit].push(item);
 			});
-			
 			console.log(subredditLines);
-			return subredditLines;
+			
+			return this.arrayOfKeys(subredditLines);
 		}, 
+		
+		arrayOfKeys: function(obj) {
+			var array = [];
+				
+			for (var key in obj) {
+				array.push(obj[key].length);
+			}
+			return array;
+		},
 		
 		getXAxis: function(data) {
-			var xAxis = {}; 
-			var getDateMark = this.getDateMark;
+			var format = d3.time.format("%b %y");
+			var xAxis = []; 
 			
 			data.forEach(function(item) {
-				var dateMark = getDateMark(item.data.created);
-				
-				if (xAxis[dateMark] == undefined) {
-					xAxis[dateMark] = [];
-				}
-				xAxis[dateMark].push(item);
+				var dateMark = format(new Date(item.data.created * 1000));
+				if (xAxis.indexOf(dateMark) == -1) { xAxis.push(dateMark); }
 			});
-			
-			console.log(xAxis);
 			return xAxis;
-		}, 
-		
-		getDateMark: function(created) {
-			var timestamp = new Date(created * 1000);
-			var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-			
-			var month = months[timestamp.getMonth()];
-			var year = timestamp.getFullYear().toString();
-			return month.substr(0,3) + " '" + year.substr(2);
 		}
 
 	}
