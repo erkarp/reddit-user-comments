@@ -18,15 +18,13 @@ menu, ul#comments {
     font-size: 16px;
     text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
 	opacity: .2;
-	/*
-	:focus {
+	&:focus {
 		outline: none; 
 	}
-	:hover {
+	&:hover {
 		opacity: .5; 
 	}
-	*/
-	.active {
+	&.active {
 		opacity: 1;
 	}
 }

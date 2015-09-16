@@ -9,11 +9,13 @@ app.factory('Graph', function() {
 				if (subredditLines[subreddit] == undefined) {
 					subredditLines[subreddit] = [];
 				}
-				subredditLines[subreddit].push(item);
+				subredditLines[subreddit].push({
+					x: new Date(item.data.created * 1000)
+				});
 			});
-			console.log(subredditLines);
 			
-			return this.arrayOfKeys(subredditLines);
+			console.log(subredditLines);
+			return subredditLines;
 		}, 
 		
 		arrayOfKeys: function(obj) {
