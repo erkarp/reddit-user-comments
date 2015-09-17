@@ -5,9 +5,9 @@ app.directive('graph', ['Graph', function (Graph) {
 			data: '='
 		},
 		link: function(scope, element, attrs) { 
-			var width = 500, height = 400, margin = 15;
+			var width = 600, height = 500, margin = 15;
 		
-			function drawGraph(xDomain, yDomain) {
+			function drawGraph(data, xDomain, yDomain, yLabels) {
 			
 				var svg = d3.select(element[0])
 					.append('svg').style({
@@ -39,17 +39,28 @@ app.directive('graph', ['Graph', function (Graph) {
 				svg.append("g")
 					.attr("class", "y axis")
 					.call(yAxis);
-
+				
+				for (var line in data) {
+					svg.selectAll("dot")
+						.data(data[line])
+						.enter().append("circle")
+						.attr("r", 3.5)
+						.attr("cx", function(d) { return x(d.x); })
+						.attr("cy", function(d) { return y(d.y); })
+						.style("fill", 'red');
+				};
 			};
 			
 			scope.$watch(function() { return scope.data; }, function(value) {
 				console.log(value);
 				if (value) {
 					var xDomain = Graph.getXAxis(value);
-					var yDomain = Graph.getSubLines(value);
+					var yDomain = Graph.getYAxis(value);
+					var data = Graph.getSubLines(value);
+					console.log(data);
 					console.log(xDomain);
 					console.log(yDomain);
-					drawGraph(xDomain, yDomain);
+					drawGraph(data, xDomain, yDomain);
 				}
 			});
 			
