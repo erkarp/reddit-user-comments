@@ -5,36 +5,40 @@ app.directive('graph', ['Graph', function (Graph) {
 			data: '='
 		},
 		link: function(scope, element, attrs) { 
-			var width = 600, height = 500, margin = 15;
+			var margin = { right: 0, bottom: 25, left: 5, top: 5 },
+				width = 600 - margin.right - margin.left, 
+				height = 500 - margin.top - margin.bottom;
 		
-			function drawGraph(data, xDomain, yDomain) {
+			function drawGraph(data, xDomain, yDomain, xlabels) {
 			
 				var svg = d3.select(element[0])
-					.append('svg').style({
-						'max-width': '100%',
-						'width': width + 'px',
-						'height': height + 'px',
-						'border': '1px solid red',
-						'margin-left': margin
-					});
+					.append('svg')
+    				.attr('width', width + margin.right + margin.left)
+    				.attr('height', height + margin.top + margin.bottom)
+					.style({ 'border': '1px solid red' });
 				
 				var x = d3.scale.ordinal()
 					.domain(xDomain)
-					.rangePoints([0, width]);
+					.rangePoints([margin.left, width-margin.right]);
+				
 				var y = d3.scale.linear()
-					.domain([d3.max(yDomain),0])
-					.range([0, height]);
+					.domain([d3.max(yDomain),d3.min(yDomain)])
+					.range([margin.top, height+margin.top]);
+				
+				var xLabels = d3.scale.ordinal()
+					.domain(xlabels)
+					.rangePoints([margin.left, width-margin.right]);
 				
 				var xAxis = d3.svg.axis()
-					.scale(x)
-					.orient("top");
+					.scale(xLabels)
+					.orient("bottom");
 				var yAxis = d3.svg.axis()
 					.scale(y)
 					.orient("right");
 				
 				svg.append("g")
 					.attr("class", "x axis")
-					.attr("transform", "translate(0," + height + ")")
+					.attr("transform", "translate(0," + (height+margin.top) + ")")
 					.call(xAxis);
 				svg.append("g")
 					.attr("class", "y axis")
@@ -50,7 +54,10 @@ app.directive('graph', ['Graph', function (Graph) {
 						.classed(line, true)
 						.style("fill", 'red');
 				};
-				
+				return svg;
+			};
+			
+			function colorDots(svg, data) {
 				for (var line in data) {
 					svg.selectAll('.'+line)
 						.style('fill', randomColor({ 
@@ -60,22 +67,19 @@ app.directive('graph', ['Graph', function (Graph) {
 				}
 			};
 			
-			function colorDots(svg, data) {
-				console.log(svg);
-				console.log(data);
-
-			};
-			
 			scope.$watch(function() { return scope.data; }, function(value) {
 				console.log(value);
 				if (value) {
 					var xDomain = Graph.getXAxis(value);
 					var yDomain = Graph.getYAxis(value);
+					var xLabels = Graph.getXAxis2(value);
 					var data = Graph.getSubLines(value);
 					console.log(data);
 					console.log(xDomain);
 					console.log(yDomain);
-					drawGraph(data, xDomain, yDomain);
+					console.log(xLabels);
+					var svg = drawGraph(data, xDomain, yDomain, xLabels);
+					colorDots(svg, data);
 				}
 			});
 			
