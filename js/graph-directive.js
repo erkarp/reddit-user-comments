@@ -7,7 +7,7 @@ app.directive('graph', ['Graph', function (Graph) {
 		link: function(scope, element, attrs) { 
 			var width = 600, height = 500, margin = 15;
 		
-			function drawGraph(data, xDomain, yDomain, yLabels) {
+			function drawGraph(data, xDomain, yDomain) {
 			
 				var svg = d3.select(element[0])
 					.append('svg').style({
@@ -20,9 +20,9 @@ app.directive('graph', ['Graph', function (Graph) {
 				
 				var x = d3.scale.ordinal()
 					.domain(xDomain)
-					.rangePoints([0, width - margin]);
+					.rangePoints([0, width]);
 				var y = d3.scale.linear()
-					.domain([0, d3.max(yDomain)])
+					.domain([d3.max(yDomain),0])
 					.range([0, height]);
 				
 				var xAxis = d3.svg.axis()
@@ -44,11 +44,26 @@ app.directive('graph', ['Graph', function (Graph) {
 					svg.selectAll("dot")
 						.data(data[line])
 						.enter().append("circle")
-						.attr("r", 3.5)
+						.attr("r", 2)
 						.attr("cx", function(d) { return x(d.x); })
 						.attr("cy", function(d) { return y(d.y); })
+						.classed(line, true)
 						.style("fill", 'red');
 				};
+				
+				for (var line in data) {
+					svg.selectAll('.'+line)
+						.style('fill', randomColor({ 
+						luminosity: 'bright', 
+						format: 'rgb' 
+					}));
+				}
+			};
+			
+			function colorDots(svg, data) {
+				console.log(svg);
+				console.log(data);
+
 			};
 			
 			scope.$watch(function() { return scope.data; }, function(value) {
