@@ -5,11 +5,11 @@ app.directive('graph', ['Graph', function (Graph) {
 			data: '='
 		},
 		link: function(scope, element, attrs) { 
-			var margin = { right: 0, bottom: 25, left: 5, top: 5 },
+			var margin = { right: 0, bottom: 25, left: 25, top: 5 },
 				width = 600 - margin.right - margin.left, 
 				height = 500 - margin.top - margin.bottom;
 		
-			function drawGraph(data, xDomain, yDomain, xlabels) {
+			function drawGraph(data, xDomain, yDomain) {
 			
 				var svg = d3.select(element[0])
 					.append('svg')
@@ -17,20 +17,20 @@ app.directive('graph', ['Graph', function (Graph) {
     				.attr('height', height + margin.top + margin.bottom)
 					.style({ 'border': '1px solid red' });
 				
-				var x = d3.scale.ordinal()
-					.domain(xDomain)
-					.rangePoints([margin.left, width-margin.right]);
+				var xMax = xDomain[0];
+				var xMin = xDomain[xDomain.length-1];
+				
+				var x = d3.time.scale()
+					.domain([xMin, xMax])
+					.range([margin.left, width-margin.right]);
 				
 				var y = d3.scale.linear()
 					.domain([d3.max(yDomain),d3.min(yDomain)])
 					.range([margin.top, height+margin.top]);
 				
-				var xLabels = d3.scale.ordinal()
-					.domain(xlabels)
-					.rangePoints([margin.left, width-margin.right]);
-				
 				var xAxis = d3.svg.axis()
-					.scale(xLabels)
+					.scale(x)
+					.ticks(8)
 					.orient("bottom");
 				var yAxis = d3.svg.axis()
 					.scale(y)
@@ -72,13 +72,11 @@ app.directive('graph', ['Graph', function (Graph) {
 				if (value) {
 					var xDomain = Graph.getXAxis(value);
 					var yDomain = Graph.getYAxis(value);
-					var xLabels = Graph.getXAxis2(value);
 					var data = Graph.getSubLines(value);
 					console.log(data);
 					console.log(xDomain);
 					console.log(yDomain);
-					console.log(xLabels);
-					var svg = drawGraph(data, xDomain, yDomain, xLabels);
+					var svg = drawGraph(data, xDomain, yDomain);
 					colorDots(svg, data);
 				}
 			});
