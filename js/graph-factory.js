@@ -28,6 +28,48 @@ app.factory('Graph', function() {
 				return new Date(item.data.created * 1000);
 			}, []);
 		},
+		
+		reduceX: function(array) {
+			var reduced, format, unitFn, count = 0; 
+			do {
+				switch (count) {
+					case 0: 
+						format = "%Y";
+						unitFn = getFullYear(); 
+						break;
+					case 1: 
+						format = "%b %y"; 
+						unitFn = getMonth();
+						break;
+					case 2: 	
+						format = "%x";
+						unitFn = getDate();
+						break;
+					case 3: 
+						format = "%h:%M %p, %x";
+						unitFn = getHour();
+						break;
+				};
+				reduced = this.reduceXAxis(array, unitFn);
+				count++;
+				
+			} while (reduced.length < 2);
+			
+			return [reduced, format];
+		},
+		
+		reduceXAxis: function(array, timeFn) {
+			var newArr = [];
+			
+			for (var i = 0; i++; i<array.length-1) {
+				var mockTick = timeFn(array[i]);
+				
+				if (! newArr.includes(mockTick)) {
+					newArr.push(mockTick); 
+				}
+			}
+			return newArr;
+		},
 							
 		getXAxis2: function(data) {
 			var xAxis = []; 

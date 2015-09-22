@@ -9,13 +9,16 @@ app.directive('graph', ['Graph', function (Graph) {
 				width = 600 - margin.right - margin.left, 
 				height = 500 - margin.top - margin.bottom;
 		
-			function drawGraph(data, xDomain, yDomain) {
+			function drawGraph(data, commentDates, yDomain) {
 			
 				var svg = d3.select(element[0])
 					.append('svg')
     				.attr('width', width + margin.right + margin.left)
     				.attr('height', height + margin.top + margin.bottom)
 					.style({ 'border': '1px solid red' });
+				
+				var xDomainStyle = Graph.reduceX(commentDates);
+				var xDomain = xDomainStyle[0], xStyle = xDomainStyle[1];
 				
 				var xMax = xDomain[0];
 				var xMin = xDomain[xDomain.length-1];
@@ -30,9 +33,8 @@ app.directive('graph', ['Graph', function (Graph) {
 				
 				var xAxis = d3.svg.axis()
 					.scale(x)
-					.ticks(8)
 					.orient("bottom")
-					.tickFormat(d3.time.format("%b %y"));
+					.tickFormat(xStyle);
 				var yAxis = d3.svg.axis()
 					.scale(y)
 					.orient("right");
