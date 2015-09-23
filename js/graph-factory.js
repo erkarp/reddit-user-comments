@@ -41,21 +41,6 @@ app.factory('Graph', function() {
 			});
 		},
 		
-		filterByUnit: function(dates, unit) {
-			var uniqueDateUnits = [];
-			dates.forEach(function(date) {
-				for (var i = 0; i < uniqueDateUnits.length-1; i++) {
-					if (date[unit] == uniqueDateUnits[i][unit]) {
-						return; 
-					} 
-				}
-				uniqueDateUnits.push(date);
-			});
-			return uniqueDateUnits.map(function(date) {
-				return date.object;
-			});
-		},
-									
 		getFormat: function(unit) {
 			switch (unit) {
 				case 'year': return "%Y";
@@ -65,17 +50,44 @@ app.factory('Graph', function() {
 				default: return "%b %y";
 			};
 		},
+
+		keysMatch: function(obj1, obj2, keys) {
+			return keys.every(function(key) {
+				return obj1[key] == obj2[key]; 
+			});
+		},
+		
+		filterByUnit: function(dates, units) {
+			var ticks = [];
+			var keysMatch = this.keysMatch;
+			
+			dates.forEach(function(date) {
+				for (var i = 0; i < ticks.length-1; i++) {
+					if (keysMatch(date, ticks[i], units)) {
+						return; 
+					} 
+				}
+				ticks.push(date);
+			});
+			
+			return ticks.map(function(date) {
+				return date.object;
+			});
+		},
 		
 		reduceX: function(data) {
 			var dateParts = this.mapDateParts(data);
-			var units = Object.keys(dateParts[0]);
-			var unit, uniqueUnits = [];
+			var units = Object.keys(dateParts[0]),
+				uniqueUnits = [],
+				pastUnits = [];
 			
 			for (var i = 0; i<units.length-1 && uniqueUnits.length<5; i++) {
-				unit = units[i];
-				uniqueUnits = this.filterByUnit(dateParts, unit);
+				pastUnits.unshift(units[i]);
+				uniqueUnits = this.filterByUnit(dateParts, pastUnits);
 			}
-			return [uniqueUnits, this.getFormat(unit)];
+			
+			var format = this.getFormat(pastUnits[0]);
+			return [uniqueUnits, format];
 		}
 	}
 });
