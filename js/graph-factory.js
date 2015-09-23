@@ -58,6 +58,7 @@ app.factory('Graph', function() {
 			return [reduced, format];
 		},
 		
+<<<<<<< Updated upstream
 		reduceXAxis: function(array, timeFn) {
 			var newArr = [];
 			
@@ -87,6 +88,55 @@ app.factory('Graph', function() {
 		format: function(date) {
 			var format = d3.time.format("%b %y");
 			return format(new Date(date * 1000));
+=======
+		keysMatch: function(obj1, obj2, keys) {
+			return keys.every(function(key) {
+				return obj1[key] == obj2[key]; 
+			});
+		},
+		
+		filterByUnit: function(dates, units) {
+			var ticks = [];
+			var keysMatch = this.keysMatch;
+			
+			dates.forEach(function(date) {
+				for (var i = 0; i < ticks.length-1; i++) {
+					if (keysMatch(date, ticks[i], units)) {
+						return; 
+					} 
+				}
+				ticks.push(date);
+			});
+			
+			return ticks.map(function(date) {
+				return date.object;
+			});
+		},
+									
+		getFormat: function(unit) {
+			switch (unit) {
+				case 'year': return "%Y";
+				case 'month': return "%b %y";
+				case 'date': return "%x";
+				case 'time': return "%h:%M %p, %x";
+				default: return "%b %y";
+			};
+		},
+		
+		reduceX: function(data) {
+			var dateParts = this.mapDateParts(data);
+			var units = Object.keys(dateParts[0]),
+				uniqueUnits = [],
+				pastUnits = [];
+			
+			for (var i = 0; i<units.length-1 && uniqueUnits.length<5; i++) {
+				pastUnits.unshift(units[i]);
+				uniqueUnits = this.filterByUnit(dateParts, pastUnits);
+			}
+			
+			var format = this.getFormat(pastUnits[0]);
+			return [uniqueUnits, format];
+>>>>>>> Stashed changes
 		}
 
 	}
