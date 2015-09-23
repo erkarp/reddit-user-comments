@@ -29,65 +29,53 @@ app.factory('Graph', function() {
 			}, []);
 		},
 		
-		reduceX: function(array) {
-			var reduced, format, unitFn, count = 0; 
-			do {
-				switch (count) {
-					case 0: 
-						format = "%Y";
-						unitFn = getFullYear(); 
-						break;
-					case 1: 
-						format = "%b %y"; 
-						unitFn = getMonth();
-						break;
-					case 2: 	
-						format = "%x";
-						unitFn = getDate();
-						break;
-					case 3: 
-						format = "%h:%M %p, %x";
-						unitFn = getHour();
-						break;
-				};
-				reduced = this.reduceXAxis(array, unitFn);
-				count++;
-				
-			} while (reduced.length < 2);
-			
-			return [reduced, format];
-		},
-		
-		reduceXAxis: function(array, timeFn) {
-			var newArr = [];
-			
-			for (var i = 0; i++; i<array.length-1) {
-				var mockTick = timeFn(array[i]);
-				
-				if (! newArr.includes(mockTick)) {
-					newArr.push(mockTick); 
-				}
-			}
-			return newArr;
-		},
-							
-		getXAxis2: function(data) {
-			var xAxis = []; 
-			var format = this.format;
-			
-			data.forEach(function(item) {
-				var dateMark = format(item.data.created);
-				if (xAxis.indexOf(dateMark) == -1) { 
-					xAxis.push(dateMark); 
+		mapDateParts: function(data) {
+			return data.map(function(item) {
+				return {
+					year: item.getFullYear(),
+					month: item.getMonth(),
+					date: item.getDate(),
+					time: item.getTime(),
+					object: item
 				}
 			});
-			return xAxis;
-		}, 
+		},
 		
-		format: function(date) {
-			var format = d3.time.format("%b %y");
-			return format(new Date(date * 1000));
+		filterByUnit: function(dates, unit) {
+			var uniqueDateUnits = [];
+			dates.forEach(function(date) {
+				for (var i = 0; i < uniqueDateUnits.length-1; i++) {
+					if (date[unit] == uniqueDateUnits[i][unit]) {
+						return; 
+					} 
+				}
+				uniqueDateUnits.push(date);
+			});
+			return uniqueDateUnits.map(function(date) {
+				return date.object;
+			});
+		},
+									
+		getFormat: function(unit) {
+			switch (unit) {
+				case 'year': return "%Y";
+				case 'month': return "%b %y";
+				case 'date': return "%x";
+				case 'time': return "%h:%M %p, %x";
+				default: return "%b %y";
+			};
+		},
+		
+		reduceX: function(data) {
+			var dateParts = this.mapDateParts(data);
+			var units = Object.keys(dateParts[0]);
+			var unit, uniqueUnits = [];
+			
+			for (var i = 0; i<units.length-1 && uniqueUnits.length<5; i++) {
+				unit = units[i];
+				uniqueUnits = this.filterByUnit(dateParts, unit);
+			}
+			return [uniqueUnits, this.getFormat(unit)];
 		}
-
 	}
 });

@@ -25,16 +25,16 @@ app.directive('graph', ['Graph', function (Graph) {
 				
 				var x = d3.time.scale()
 					.domain([xMin, xMax])
-					.range([margin.left, width-margin.right]);
+					.range([margin.left, width+margin.right]);
 				
 				var y = d3.scale.linear()
 					.domain([d3.max(yDomain),d3.min(yDomain)])
-					.range([margin.top, height+margin.top]);
+					.range([margin.bottom, height+margin.top]);
 				
 				var xAxis = d3.svg.axis()
 					.scale(x)
 					.orient("bottom")
-					.tickFormat(xStyle);
+					.tickFormat(d3.time.format(xStyle));
 				var yAxis = d3.svg.axis()
 					.scale(y)
 					.orient("right");
