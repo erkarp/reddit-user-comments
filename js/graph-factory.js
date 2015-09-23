@@ -1,4 +1,4 @@
-app.factory('Graph', function() {
+app.factory('Graph', ['xAxis', function(xAxis) {
 	return {
 		getSubLines: function(data) {
 			var subredditLines = {};
@@ -24,11 +24,17 @@ app.factory('Graph', function() {
 		},
 		
 		getXAxis: function(data) {
-			return data.map(function(item) {
+			var allDates = data.map(function(item) {
 				return new Date(item.data.created * 1000);
 			}, []);
-		},
+			
+			return xAxis.reduceX(allDates);
+		}
+	}
+}]);
 		
+app.factory('xAxis', function() {
+	return {
 		mapDateParts: function(data) {
 			return data.map(function(item) {
 				return {
@@ -44,8 +50,8 @@ app.factory('Graph', function() {
 		getFormat: function(unit) {
 			switch (unit) {
 				case 'year': return "%Y";
-				case 'month': return "%b %y";
-				case 'date': return "%x";
+				case 'month': return "%b '%y";
+				case 'date': return "%b %e, '%y";
 				case 'time': return "%h:%M %p, %x";
 				default: return "%b %y";
 			};
@@ -58,16 +64,15 @@ app.factory('Graph', function() {
 		},
 		
 		filterByUnit: function(dates, units) {
-			var ticks = [];
-			var keysMatch = this.keysMatch;
+			var keysMatch = this.keysMatch,
+				ticks = [];
 			
 			dates.forEach(function(date) {
-				for (var i = 0; i < ticks.length-1; i++) {
-					if (keysMatch(date, ticks[i], units)) {
-						return; 
-					} 
-				}
-				ticks.push(date);
+				var redundantDate = ticks.some(function(tick) {
+					return keysMatch(date, tick, units);
+				});
+				
+				if (! redundantDate) { ticks.push(date); }
 			});
 			
 			return ticks.map(function(date) {
@@ -76,18 +81,24 @@ app.factory('Graph', function() {
 		},
 		
 		reduceX: function(data) {
-			var dateParts = this.mapDateParts(data);
-			var units = Object.keys(dateParts[0]),
+			var dateMaps = this.mapDateParts(data);
+			var units = Object.keys(dateMaps[0]),
 				uniqueUnits = [],
 				pastUnits = [];
 			
 			for (var i = 0; i<units.length-1 && uniqueUnits.length<5; i++) {
 				pastUnits.unshift(units[i]);
-				uniqueUnits = this.filterByUnit(dateParts, pastUnits);
+				uniqueUnits = this.filterByUnit(dateMaps, pastUnits);
 			}
 			
+			uniqueUnits.push(dateMaps[dateMaps.length-1].object);
+			uniqueUnits.unshift(dateMaps[0].object);
+			
 			var format = this.getFormat(pastUnits[0]);
-			return [uniqueUnits, format];
+			return {
+				array: uniqueUnits, 
+				style: format
+			};
 		}
 	}
 });

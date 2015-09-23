@@ -5,27 +5,23 @@ app.directive('graph', ['Graph', function (Graph) {
 			data: '='
 		},
 		link: function(scope, element, attrs) { 
-			var margin = { right: 0, bottom: 25, left: 25, top: 5 },
+			var margin = { right: 0, bottom: 25, left: 30, top: 5 },
 				width = 600 - margin.right - margin.left, 
 				height = 500 - margin.top - margin.bottom;
 		
-			function drawGraph(data, commentDates, yDomain) {
+			function drawGraph(data, xStyle, xDomain, yDomain) {
 			
 				var svg = d3.select(element[0])
 					.append('svg')
     				.attr('width', width + margin.right + margin.left)
-    				.attr('height', height + margin.top + margin.bottom)
-					.style({ 'border': '1px solid red' });
-				
-				var xDomainStyle = Graph.reduceX(commentDates);
-				var xDomain = xDomainStyle[0], xStyle = xDomainStyle[1];
+    				.attr('height', height + margin.top + margin.bottom);
 				
 				var xMax = xDomain[0];
 				var xMin = xDomain[xDomain.length-1];
 				
 				var x = d3.time.scale()
 					.domain([xMin, xMax])
-					.range([margin.left, width+margin.right]);
+					.range([margin.left, width+margin.left]);
 				
 				var y = d3.scale.linear()
 					.domain([d3.max(yDomain),d3.min(yDomain)])
@@ -33,11 +29,12 @@ app.directive('graph', ['Graph', function (Graph) {
 				
 				var xAxis = d3.svg.axis()
 					.scale(x)
+					.ticks(10)
 					.orient("bottom")
 					.tickFormat(d3.time.format(xStyle));
 				var yAxis = d3.svg.axis()
 					.scale(y)
-					.orient("right");
+					.orient("left");
 				
 				svg.append("g")
 					.attr("class", "x axis")
@@ -45,6 +42,7 @@ app.directive('graph', ['Graph', function (Graph) {
 					.call(xAxis);
 				svg.append("g")
 					.attr("class", "y axis")
+					.attr("transform", "translate(" + (margin.left) + ", 0)")
 					.call(yAxis);
 				
 				for (var line in data) {
@@ -71,15 +69,11 @@ app.directive('graph', ['Graph', function (Graph) {
 			};
 			
 			scope.$watch(function() { return scope.data; }, function(value) {
-				console.log(value);
 				if (value) {
-					var xDomain = Graph.getXAxis(value);
-					var yDomain = Graph.getYAxis(value);
+					var xDom = Graph.getXAxis(value);
+					var yDom = Graph.getYAxis(value);
 					var data = Graph.getSubLines(value);
-					console.log(data);
-					console.log(xDomain);
-					console.log(yDomain);
-					var svg = drawGraph(data, xDomain, yDomain);
+					var svg = drawGraph(data, xDom.style, xDom.array, yDom);
 					colorDots(svg, data);
 				}
 			});
