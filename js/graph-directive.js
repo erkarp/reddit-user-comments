@@ -1,4 +1,4 @@
-app.directive('graph', ['Graph', function (Graph) {
+app.directive('graph', ['Graph', 'Color', function (Graph, Color) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -52,8 +52,7 @@ app.directive('graph', ['Graph', function (Graph) {
 						.attr("r", 2)
 						.attr("cx", function(d) { return x(d.x); })
 						.attr("cy", function(d) { return y(d.y); })
-						.classed(line, true)
-						.style("fill", 'red');
+						.classed(line, true);
 				};
 				return svg;
 			};
@@ -68,13 +67,18 @@ app.directive('graph', ['Graph', function (Graph) {
 				}
 			};
 			
+			function color(subs) {
+				Color.reddits(subs);
+			};
+			
 			scope.$watch(function() { return scope.data; }, function(value) {
 				if (value) {
 					var xDom = Graph.getXAxis(value);
 					var yDom = Graph.getYAxis(value);
 					var data = Graph.getSubLines(value);
 					var svg = drawGraph(data, xDom.style, xDom.array, yDom);
-					colorDots(svg, data);
+					
+					color( Object.keys(data) );
 				}
 			});
 			

@@ -20,7 +20,7 @@ app.directive('comment', function () {
 					}
 				}
 			};
-
+/*
 			scope.$watch(function() { 
 				if (scope.colorData) {
 					return scope.colorData[0].pointColor;
@@ -29,7 +29,7 @@ app.directive('comment', function () {
 			function(value) {
 				setCommentLabelColors();
 			});
-    
+  */  
       }
     };
   });

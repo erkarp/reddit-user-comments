@@ -21,7 +21,7 @@
 	<div class="container">
 	
 		<p>www.reddit.com/u/<input type="text" ng-model="username">/ <button type="submit" ng-click="createChart(username)">Go</button>
-		<button ng-click="colorChart()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
+		<button ng-click="color()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
 		
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 		
@@ -34,7 +34,7 @@
 
 			<menu>
 				<button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
-				<button sub class="subreddit active" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
+				<button sub class="subreddit active {{sub.label}}" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
 			</menu>
 
 			<ul id="comments">
@@ -42,7 +42,7 @@
 			</ul>
 		
 			<footer>
-				<p><a href="https://www.emilykarp.com">Emily Karp</a></p>
+				<p><a href="https://www.emilykarp.com">Developer</a></p>
 			</footer>
 		</main>
 	</div>

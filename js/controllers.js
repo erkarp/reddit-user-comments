@@ -1,4 +1,4 @@
-app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart', 'Comments', function($rootScope, $scope, PrepData, DrawChart, Comments){
+app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart', 'Comments', 'Color', function($rootScope, $scope, PrepData, DrawChart, Comments, Color){
 	
 	$scope.setSub = function(sub) {
 		$rootScope.chosenSub = sub;
@@ -28,6 +28,10 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData','DrawChart
         function (red) {
 			$scope.errorClass = 'red';
         }); 
+	};
+	
+	$scope.color = function() {
+		Color.reddits(); 
 	};
 	
 	$scope.colorChart = function() {

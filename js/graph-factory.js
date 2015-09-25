@@ -102,3 +102,32 @@ app.factory('xAxis', function() {
 		}
 	}
 });
+
+app.service('Color', function() {
+	var color = [], data= [];
+	color = color.concat(d3.scale.category10().range());
+	color = color.concat(d3.scale.category20().range());
+	color = color.concat(d3.scale.category20b().range());
+	color = color.concat(d3.scale.category20c().range());
+	var start = 0;
+	
+	this.reddits = function(subs) {
+		if (subs == undefined) {
+			subs = data;
+		} else {
+			data = subs; 
+		}
+		
+		for (var i = 0; i<subs.length-1; i++) {
+			d3.selectAll("circle." + subs[i])
+				.style("fill", color[start+i]);
+			
+			d3.selectAll("button." + subs[i])
+				.style("background-color", color[start+i]);
+			
+			d3.selectAll("#comments a." + subs[i])
+				.style("background-color", color[start+i]);
+		}
+		start++;
+	};
+});
