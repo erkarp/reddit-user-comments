@@ -4,18 +4,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-	<script src="js/randomColor.js"></script>
-	<script src="js/Chart.js"></script>
-	<script src="js/redditChart.js"></script>
-	<script src="js/graph-factory.js"></script>
-	<script src="js/comments-service.js"></script>
-	<script src="js/comment-directive.js"></script>
-	<script src="js/subreddit-directive.js"></script>
-	<script src="js/chartjs-directive.js"></script>
-	<script src="js/graph-directive.js"></script>
-	<script src="js/error-directive.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/sub-filter.js"></script>
+	<script src="js/chart/randomColor.js"></script>
+	<script src="js/chart/Chart.js"></script>
+	<script src="js/chart/redditChart.js"></script>
+	<script src="js/chart/chartjs-directive.js"></script>
+	<script src="js/graph/graph-factory.js"></script>
+	<script src="js/graph/graph-directive.js"></script>
+	<script src="js/comments/comments-service.js"></script>
+	<script src="js/comments/comment-directive.js"></script>
+	<script src="js/subreddits/subreddit-directive.js"></script>
+	<script src="js/subreddits/sub-filter.js"></script>
+	<script src="js/error/error-directive.js"></script>
+	<script src="js/error/controllers.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
@@ -38,7 +38,7 @@
 			</menu>
 
 			<ul id="comments">
-				<li comment info="comment.data" color="myChart.data.datasets" ng-repeat="comment in comments | subChoice:chosenSub"></li>
+				<li comment info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
 			</ul>
 		
 			<footer>
