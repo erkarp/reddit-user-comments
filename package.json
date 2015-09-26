@@ -1,0 +1,10 @@
+{
+  "name": "reddit-user-comments",
+  "version": "0.1.0",
+  "devDependencies": {
+    "d3": "^3.5.6",
+    "grunt": "^0.4.5",
+    "grunt-ftp-push": "^0.4.1",
+    "grunt-sass": "^1.0.0"
+  }
+}

@@ -22,4 +22,14 @@ menu, ul#comments {
 
 .subreddit.active {
 	opacity: 1;
+	
+	&:focus {
+		outline: none; 
+	}
+	&:hover {
+		opacity: .5; 
+	}
+	&.active {
+		opacity: 1;
+	}
 }

@@ -4,43 +4,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-	<script src="js/randomColor.js"></script>
-	<script src="js/Chart.js"></script>
-	<script src="js/redditChart.js"></script> 
-	<script src="js/graph-directive.js"></script>
-	<script src="js/comment-directive.js"></script>
-	<script src="js/subreddit-directive.js"></script>
-	<script src="js/chartjs-directive.js"></script>
-	<script src="js/error-directive.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/sub-filter.js"></script>
+	<script src="js/chart/randomColor.js"></script>
+	<script src="js/chart/Chart.js"></script>
+	<script src="js/chart/redditChart.js"></script>
+	<script src="js/chart/chartjs-directive.js"></script>
+	<script src="js/graph/graph-factory.js"></script>
+	<script src="js/graph/graph-directive.js"></script>
+	<script src="js/comments/comments-service.js"></script>
+	<script src="js/comments/comment-directive.js"></script>
+	<script src="js/subreddits/subreddit-directive.js"></script>
+	<script src="js/subreddits/sub-filter.js"></script>
+	<script src="js/error/error-directive.js"></script>
+	<script src="js/error/controllers.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
 	
 		<p>www.reddit.com/u/<input type="text" ng-model="username">/ <button type="submit" ng-click="createChart(username)">Go</button>
-		<button ng-click="colorChart()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
+		<button ng-click="color()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
 		
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 		
 		<main ng-show="data&&comments&&!errorClass">
+			<graph data="comments"></graph>
+		
 			<div ng-app="chartjs-directive">
 				<chart value="myChart"></chart>
 			</div>
 
 			<menu>
 				<button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
-				<button sub class="subreddit active" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
+				<button sub class="subreddit active {{sub.label}}" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
 			</menu>
 
 			<ul id="comments">
-				<li comment info="comment.data" color="myChart.data.datasets" ng-repeat="comment in comments | subChoice:chosenSub"></li>
+				<li comment info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
 			</ul>
-		</main>
 		
-		<footer ng-show="data&&comments&&!errorClass">
-			<p><a href="https://www.emilykarp.com">Emily Karp</a></p>
-		</footer>
+			<footer>
+				<p><a href="https://www.emilykarp.com">Developer</a></p>
+			</footer>
+		</main>
 	</div>
 </body>
 </html>
