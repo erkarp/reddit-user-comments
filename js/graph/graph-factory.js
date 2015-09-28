@@ -11,7 +11,10 @@ app.factory('Graph', ['xAxis', function(xAxis) {
 				}
 				subredditLines[subreddit].push({
 					x: new Date(item.data.created * 1000),
-					y: item.data.score
+					y: item.data.score,
+					id: item.data.id,
+					ups: item.data.ups,
+					downs: item.data.downs
 				});
 			});
 			return subredditLines;

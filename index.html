@@ -10,6 +10,7 @@
 	<script src="js/chart/chartjs-directive.js"></script>
 	<script src="js/graph/graph-factory.js"></script>
 	<script src="js/graph/graph-directive.js"></script>
+	<script src="js/graph/scroll-service.js"></script>
 	<script src="js/comments/comments-service.js"></script>
 	<script src="js/comments/comment-directive.js"></script>
 	<script src="js/subreddits/subreddit-directive.js"></script>
@@ -38,7 +39,7 @@
 			</menu>
 
 			<ul id="comments">
-				<li comment info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
+				<li comment id="comment{{comment.data.id}}" info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
 			</ul>
 		
 			<footer>

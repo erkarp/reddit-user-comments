@@ -25,9 +25,7 @@ module.exports = function(grunt) {
 				  expand: true,
 				  cwd: '.',
 				  src: [
-					  "js/graph/*",
-					  "js/subreddits/*",
-					  "js/comments/*",
+					  "js/*/*",
 					  "*.html"
 				  ]
 				}

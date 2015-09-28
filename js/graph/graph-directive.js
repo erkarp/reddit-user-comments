@@ -1,4 +1,4 @@
-app.directive('graph', ['$rootScope', 'Graph', 'Color', function ($rootScope, Graph, Color) {
+app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($rootScope, Graph, Color, Scroll) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -52,7 +52,12 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', function ($rootScope, Gr
 						.attr("r", 3)
 						.attr("cx", function(d) { return x(d.x); })
 						.attr("cy", function(d) { return y(d.y); })
-						.classed(line, true);
+						.attr("id", function(d) { return d.id; })
+						.classed(line, true)
+						.on("click", function() {
+							Scroll.to( d3.select(this).attr("id") );
+						});
+
 				};
 				return svg;
 			};
