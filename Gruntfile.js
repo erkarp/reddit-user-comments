@@ -1,6 +1,21 @@
 module.exports = function(grunt) {
 //require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
+	function ftpTask(files) {
+		return {
+			options: {
+					host: "wdsclient.com",
+					dest: "/public_html/em/code/",
+					authKey: "server",
+			},
+			files: [{
+				expand: true,
+				cwd: '.',
+				src: [ files ]
+			}]
+		}
+	};
+
 	grunt.config.init({
 		sass: {
 			options: {
@@ -13,41 +28,35 @@ module.exports = function(grunt) {
 			}
 		},
 		ftp_push: {
-			your_target: {
-			  options: {
-				host: "wdsclient.com",
-				dest: "/public_html/em/code/",
-				username: "wdsclien",
-				password: "u=c@c3aM"
-			  },
-			  files: [
-				{
-				  expand: true,
-				  cwd: '.',
-				  src: [
-					  "js/*/*",
-					  "*.html"
-				  ]
-				}
-			  ]
-			}
+			all: ftpTask([
+				"**.html",
+				"stylesheets/style.css",
+				"js/**"
+			]),
+			css: ftpTask([
+				'stylesheets/style.css'
+			]),
+			html: ftpTask([
+				'**.html'
+			]),
+			js: ftpTask([
+				'js/<%= path %>/**'
+			])
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-ftp-push');
-	
-	grunt.registerTask('push', ['ftp_push']);
-	
 
-	grunt.registerTask('go', 'push individual files', function(newFiles) {
-		
-		grunt.log.writeln(grunt.config.data.ftp_push.your_target.files[0].src);
-		grunt.config.set(grunt.config.escape('grunt.config.data.ftp_push.your_target.files.0'), {'src':'["index.html"]'});
-		grunt.log.writeln(grunt.config.data.ftp_push.your_target.files[0].src);
-	//	grunt.task.run(['ftp_push']);
-	});	
+	grunt.registerTask('push', ['ftp_push:all']);
+	grunt.registerTask('html', ['ftp_push:html']);
+	grunt.registerTask('css', ['sass', 'ftp_push:css']);
 
+	grunt.registerTask('js', '', function(folder) {
+		var path = (folder == undefined) ? '**' : folder;
+		grunt.config.set('path', path)
+		grunt.task.run('ftp_push:js');
+	});
 
-	
+	grunt.registerTask('default', ['sass', 'ftp_push:all']);
 };
