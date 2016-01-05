@@ -9,7 +9,7 @@ app.service('Scroll', function($location, $anchorScroll) {
 });
 
 
-app.service('Color', function($rootScope) {
+app.service('Color', function($rootScope, Shuffle) {
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
@@ -18,7 +18,7 @@ app.service('Color', function($rootScope) {
 	color = color.concat(d3.scale.category20().range());
 	color = color.concat(d3.scale.category20b().range());
 	color = color.concat(d3.scale.category20c().range());
-	color = color.slice(0,65);
+	color = Shuffle.array(color.slice(0,65));
 
 	this.reddits = function(subs) {
 
@@ -33,3 +33,20 @@ app.service('Color', function($rootScope) {
 		$rootScope.subColors = cObj;
 	};
 });
+
+app.service('Shuffle', function () {
+	return {
+		array: function(array) {
+		  var m = array.length, t, i;
+
+		  while (m) {
+		    i = Math.floor(Math.random() * m--);
+		    t = array[m];
+		    array[m] = array[i];
+		    array[i] = t;
+		  }
+
+		  return array;
+		}
+	}
+})
