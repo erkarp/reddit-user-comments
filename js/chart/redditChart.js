@@ -1,4 +1,4 @@
-var app = angular.module('MyApp', []);
+var app = angular.module('RedditUserComments', []);
 
 app.factory('PrepData', [function() {
 	return {

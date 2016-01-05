@@ -27,6 +27,20 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		karma: {
+		  unit: {
+		    options: {
+		      frameworks: ['jasmine'],
+		      singleRun: true,
+		      browsers: ['PhantomJS'],
+		      files: [
+		        'node_modules/angular/angular.js',
+		        'node_modules/angular-mocks/angular-mocks.js',
+		        'js/**/*.js'
+		      ]
+		    }
+		  }
+		},
 		ftp_push: {
 			all: ftpTask([
 				"**.html",
@@ -46,11 +60,14 @@ module.exports = function(grunt) {
 	});
 
 	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-ftp-push');
 
 	grunt.registerTask('push', ['ftp_push:all']);
 	grunt.registerTask('html', ['ftp_push:html']);
 	grunt.registerTask('css', ['sass', 'ftp_push:css']);
+	grunt.registerTask('test', ['karma']);
+
 
 	grunt.registerTask('js', '', function(folder) {
 		var path = (folder == undefined) ? '**' : folder;
