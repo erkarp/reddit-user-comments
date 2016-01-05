@@ -4,10 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-	<script src="js/chart/randomColor.js"></script>
-	<script src="js/chart/Chart.js"></script>
 	<script src="js/chart/redditChart.js"></script>
-	<script src="js/chart/chartjs-directive.js"></script>
 	<script src="js/graph/graph-factory.js"></script>
 	<script src="js/graph/graph-directive.js"></script>
 	<script src="js/graph/scroll-service.js"></script>
@@ -20,18 +17,14 @@
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
-	
+
 		<p>www.reddit.com/u/<input type="text" ng-model="username">/ <button type="submit" ng-click="createChart(username)">Go</button>
 		<button ng-click="color()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
-		
+
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
-		
+
 		<main ng-show="data&&comments&&!errorClass">
 			<graph data="comments"></graph>
-		
-			<div ng-app="chartjs-directive">
-				<chart value="myChart"></chart>
-			</div>
 
 			<menu>
 				<button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
@@ -41,7 +34,7 @@
 			<ul id="comments">
 				<li comment id="comment{{comment.data.id}}" info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
 			</ul>
-		
+
 			<footer>
 				<p><a href="https://www.emilykarp.com">Developer</a></p>
 			</footer>
