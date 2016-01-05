@@ -7,8 +7,8 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments
 	};
 
 	$scope.createChart = function(user) {
-		$rootScope.chosenSub = 'all';
 		$rootScope.subColors = [];
+		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.errorClass = false;
 		$scope.user = user;
