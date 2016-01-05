@@ -1,11 +1,11 @@
-app.controller('CloudController', ['$scope', 'Comments', 'Main',
-function($scope, Comments, Main){
+app.controller('CloudController', ['$scope', '$controller', 'Comments',
+function($scope, Comments, Color){
 
 	$scope.createChart = function(user) {
 		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.errorClass = false;
-		$scope.user = user;
+		$rootScope.subColors = [];
 
 		Comments.async(user)
 		.then(function(result) {
@@ -15,7 +15,8 @@ function($scope, Comments, Main){
 				return;
 			}
 			$scope.errorClass = false;
-			Main.analyze(result);
+	    $scope.comments = result;
+	    $scope.data = PrepData.parse(result);
 
 		},
     function (red) {
@@ -24,7 +25,7 @@ function($scope, Comments, Main){
 	};
 
 	$scope.color = function() {
-		Main.color();
+		Color.reddits();
 	};
 
 }]);

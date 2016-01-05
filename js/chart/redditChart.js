@@ -1,6 +1,6 @@
 var app = angular.module('UserSubs', ['ngRoute']);
 
-app.factory('PrepData', [function() {
+app.factory('Data', [function() {
 	return {
 		parse: function(comments) {
 			var data = {
