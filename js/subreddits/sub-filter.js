@@ -1,4 +1,4 @@
-app.filter('subChoice', function ('Help') {
+app.filter('subChoice', function () {
 
   return function (input, chosenSub) {
 
@@ -14,9 +14,4 @@ app.filter('subChoice', function ('Help') {
     return out;
   }
 
-});
-
-
-app.service('Help', function ($filter) {
-    this.me = $filter('subChoice')('kidfree');
 });

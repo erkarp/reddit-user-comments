@@ -1,8 +1,9 @@
-<html ng-app="MyApp">
+<html ng-app="UserSubs">
   <head>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 	<script src="js/chart/redditChart.js"></script>
 	<script src="js/graph/graph-factory.js"></script>
@@ -14,6 +15,9 @@
 	<script src="js/subreddits/sub-filter.js"></script>
 	<script src="js/error/error-directive.js"></script>
 	<script src="js/error/controllers.js"></script>
+  <script src="js/main/main-ctrl.js"></script>
+  <script src="js/main/main.html"></script>
+  <script src="js/config.js"></script>
   </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
@@ -23,22 +27,8 @@
 
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 
-		<main ng-show="data&&comments&&!errorClass">
-			<graph data="comments"></graph>
+    <main ng-view></main>
 
-			<menu>
-				<button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
-				<button sub class="subreddit active {{sub.label}}" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
-			</menu>
-
-			<ul id="comments">
-				<li comment id="comment{{comment.data.id}}" info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
-			</ul>
-
-			<footer>
-				<p><a href="https://www.emilykarp.com">Developer</a></p>
-			</footer>
-		</main>
 	</div>
 </body>
 </html>

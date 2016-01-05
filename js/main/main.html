@@ -1,0 +1,16 @@
+<div ng-controller="MainCtrl as main" ng-show="data&&comments&&!errorClass">
+  <graph data="comments"></graph>
+
+  <menu>
+    <button sub class="subreddit active" info="{label: 'all', total: comments.length}" ng-click="setSub('all');"></button>
+    <button sub class="subreddit active {{sub.label}}" info="sub" ng-repeat="sub in data.datasets" ng-click="setSub(sub.label)"></button>
+  </menu>
+
+  <ul id="comments">
+    <li comment id="comment{{comment.data.id}}" info="comment.data" ng-repeat="comment in comments | subChoice:chosenSub"></li>
+  </ul>
+
+  <footer>
+    <p><a href="https://www.emilykarp.com">Developer</a></p>
+  </footer>
+</div>

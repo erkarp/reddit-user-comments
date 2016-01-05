@@ -1,13 +1,7 @@
-app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments', 'Color', function($rootScope, $scope, PrepData, Comments, Color){
-
-	var allComments;
-
-	$scope.setSub = function(sub) {
-		$rootScope.chosenSub = sub;
-	};
+app.controller('CloudController', ['$scope', 'Comments', 'Main',
+function($scope, Comments, Main){
 
 	$scope.createChart = function(user) {
-		$rootScope.subColors = [];
 		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.errorClass = false;
@@ -20,12 +14,9 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments
 				$scope.errorClass = 'orange';
 				return;
 			}
-
 			$scope.errorClass = false;
-			$scope.comments = result;
+			Main.analyze(result);
 
-			allComments = result;
-			$scope.data = PrepData.parse(result);
 		},
     function (red) {
 			$scope.errorClass = 'red';
@@ -33,7 +24,7 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments
 	};
 
 	$scope.color = function() {
-		Color.reddits();
+		Main.color();
 	};
 
 }]);
