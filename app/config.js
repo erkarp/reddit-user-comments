@@ -1,3 +1,4 @@
+var app = angular.module('RedditUserComments', ['ngRoute']);
 
 app.config(function ($routeProvider) {
     $routeProvider

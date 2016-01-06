@@ -1,5 +1,3 @@
-var app = angular.module('RedditUserComments', ['ngRoute']);
-
 app.factory('Data', [function() {
 	return {
 		parse: function(comments) {

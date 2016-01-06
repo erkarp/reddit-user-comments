@@ -3,7 +3,8 @@ describe('RedditUserComments', function() {
   beforeEach(module('RedditUserComments'));
 
   beforeEach(inject(function($injector) {
-    PrepData = $injector.get('PrepData');
+    Comments = $injector.get('Comments');
+    Data = $injector.get('Data');
   }));
 
 
@@ -13,8 +14,13 @@ describe('RedditUserComments', function() {
   });
 
   it('Should report that PrepData timestamp is a string', function() {
-    var newDate = PrepData.monthYr(new Date);
+    var newDate = Data.monthYr(new Date);
     expect(typeof newDate).toEqual('string');
   });
+
+  it('should return a huge array striaght from reddit', function() {
+    var comments = Comments.async('teaperson');
+    expect(comments.length).toEqual(100);
+  })
 
 });

@@ -32,7 +32,15 @@ module.exports = function(grunt) {
 	      separator: grunt.util.linefeed,
 	    },
 	    dist: {
-	      src: ['app/**/*.js'],
+	      src: [
+					'app/config.js',
+					'app/error/*.js',
+					'app/comments/*.js',
+					'app/subreddits/*.js',
+					'app/main/*.js',
+					'app/chart/*.js',
+					'app/graph/*.js'
+				],
 	      dest: 'script.js'
 	    }
 	  },
@@ -45,7 +53,7 @@ module.exports = function(grunt) {
 		      files: [
 		        'node_modules/angular/angular.js',
 		        'node_modules/angular-mocks/angular-mocks.js',
-		        'js/**/*.js'
+		        'script.js'
 		      ]
 		    }
 		  }
@@ -55,10 +63,10 @@ module.exports = function(grunt) {
 				'stylesheets/style.css'
 			]),
 			html: ftpTask([
-				'**.html', 'js/**/*.html'
+				'**.html', 'app/**/*.html'
 			]),
 			js: ftpTask([
-				'reddit-user-comments.js'
+				'script.js'
 			])
 		}
 	});

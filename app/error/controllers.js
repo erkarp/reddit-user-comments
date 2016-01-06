@@ -1,5 +1,5 @@
-app.controller('CloudController', ['$scope', '$controller', 'Comments',
-function($scope, Comments, Color){
+app.controller('CloudController', ['$scope', '$rootScope', 'Comments', 'Color',
+function($scope, $rootScope, Comments, Color){
 
 	$scope.createChart = function(user) {
 		$scope.setSub = 'all';
@@ -16,7 +16,9 @@ function($scope, Comments, Color){
 			}
 			$scope.errorClass = false;
 	    $scope.comments = result;
-	    $scope.data = PrepData.parse(result);
+	    $scope.data = Comments.analyze(result);
+			console.dir($scope.comments);
+			console.dir($scope.data);
 
 		},
     function (red) {
