@@ -27,6 +27,15 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		concat: {
+	    options: {
+	      separator: ';',
+	    },
+	    dist: {
+	      src: ['js/**/*.js', '!js/tests/*'],
+	      dest: 'js/main.js',
+	    },
+	  },
 		karma: {
 		  unit: {
 		    options: {
@@ -42,11 +51,6 @@ module.exports = function(grunt) {
 		  }
 		},
 		ftp_push: {
-			all: ftpTask([
-				"**.html",
-				"stylesheets/style.css",
-				"js/**"
-			]),
 			css: ftpTask([
 				'stylesheets/style.css'
 			]),
@@ -54,26 +58,20 @@ module.exports = function(grunt) {
 				'**.html'
 			]),
 			js: ftpTask([
-				'js/<%= path %>/**'
+				'js/main.js'
 			])
 		}
 	});
 
+	grunt.loadNpmTasks('grunt-ftp-push');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-karma');
-	grunt.loadNpmTasks('grunt-ftp-push');
 
-	grunt.registerTask('push', ['ftp_push:all']);
 	grunt.registerTask('html', ['ftp_push:html']);
-	grunt.registerTask('css', ['sass', 'ftp_push:css']);
-	grunt.registerTask('test', ['karma']);
+	grunt.registerTask('css',  ['sass', 'ftp_push:css']);
+	grunt.registerTask('js',   ['concat', 'ftp_push:js']);
+	grunt.registerTask('test', ['concat','karma']);
 
-
-	grunt.registerTask('js', '', function(folder) {
-		var path = (folder == undefined) ? '**' : folder;
-		grunt.config.set('path', path)
-		grunt.task.run('ftp_push:js');
-	});
-
-	grunt.registerTask('default', ['sass', 'ftp_push:all']);
+	grunt.registerTask('default', ['js', 'css', 'html']);
 };
