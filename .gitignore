@@ -1,5 +1,6 @@
 .ftpauth
 .DS_Store
+.sass-cache/
 node_modules/
 stylesheets/
-js/main.js
+script.js

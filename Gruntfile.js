@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 		return {
 			options: {
 					host: "wdsclient.com",
-					dest: "/public_html/em/code/",
+					dest: "/public_html/emilykarp/reddit-user-comments",
 					authKey: "server",
 			},
 			files: [{
@@ -29,12 +29,12 @@ module.exports = function(grunt) {
 		},
 		concat: {
 	    options: {
-	      separator: ';',
+	      separator: grunt.util.linefeed,
 	    },
 	    dist: {
-	      src: ['js/**/*.js', '!js/tests/*'],
-	      dest: 'js/main.js',
-	    },
+	      src: ['app/**/*.js'],
+	      dest: 'script.js'
+	    }
 	  },
 		karma: {
 		  unit: {
@@ -55,10 +55,10 @@ module.exports = function(grunt) {
 				'stylesheets/style.css'
 			]),
 			html: ftpTask([
-				'**.html'
+				'**.html', 'js/**/*.html'
 			]),
 			js: ftpTask([
-				'js/main.js'
+				'reddit-user-comments.js'
 			])
 		}
 	});
