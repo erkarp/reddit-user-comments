@@ -1,18 +1,20 @@
-describe('RedditUserComments.Shuffle', function() {
-
-  var FibonacciService;
+describe('RedditUserComments', function() {
 
   beforeEach(module('RedditUserComments'));
+
   beforeEach(inject(function($injector) {
-    Shuffle = $injector.get('Shuffle');
+    PrepData = $injector.get('PrepData');
   }));
 
-  it('Should report array length', function() {
-    expect([1, 2, 3].length).toEqual(3);
+
+  it('Should report Shuffle return length and type', function() {
+    var newArr = Shuffle.array([1, 2, 3, 4, 5]);
+    expect(Shuffle.array([1, 2, 3, 4, 5])).toN
   });
 
-  it('Should return "object"', function() {
-    expect(typeof [0]).toMatch('object');
-  })
+  it('Should report that PrepData timestamp is a string', function() {
+    var newDate = PrepData.monthYr(new Date);
+    expect(typeof newDate).toEqual('string');
+  });
 
 });

@@ -1,7 +1,7 @@
 app.directive('comment', ['$rootScope', function($rootScope) {
     return {
       restrict: 'A',
-	  templateUrl: 'js/comments/comment.html',
+	    templateUrl: 'js/comments/comment.html',
       scope: {
         commentData: '=info'
       },

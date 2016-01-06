@@ -34,7 +34,8 @@ app.factory('PrepData', [function() {
 					data: [0],
 					total: 0
 				});
-			} return data;
+			}
+			return data;
 		},
 
 		addDate: function(data, monthYear) {
@@ -44,7 +45,8 @@ app.factory('PrepData', [function() {
 				data.datasets.forEach(function(item){
 					item.data.push(0);
 				});
-			} return data;
+			}
+			return data;
 		},
 
 		getLine: function(data, subreddit, fromAddLine) {
@@ -55,7 +57,8 @@ app.factory('PrepData', [function() {
 					}
 					return data.datasets[i].data;
 				}
-			} return -1;
+			}
+			return -1;
 		}
 	};
 }]);
