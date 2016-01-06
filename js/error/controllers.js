@@ -1,17 +1,11 @@
-app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments', 'Color', function($rootScope, $scope, PrepData, Comments, Color){
-
-	var allComments;
-
-	$scope.setSub = function(sub) {
-		$rootScope.chosenSub = sub;
-	};
+app.controller('CloudController', ['$scope', '$controller', 'Comments',
+function($scope, Comments, Color){
 
 	$scope.createChart = function(user) {
-		$rootScope.subColors = [];
 		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.errorClass = false;
-		$scope.user = user;
+		$rootScope.subColors = [];
 
 		Comments.async(user)
 		.then(function(result) {
@@ -20,12 +14,10 @@ app.controller('CloudController', ['$rootScope', '$scope', 'PrepData', 'Comments
 				$scope.errorClass = 'orange';
 				return;
 			}
-
 			$scope.errorClass = false;
-			$scope.comments = result;
+	    $scope.comments = result;
+	    $scope.data = PrepData.parse(result);
 
-			allComments = result;
-			$scope.data = PrepData.parse(result);
 		},
     function (red) {
 			$scope.errorClass = 'red';

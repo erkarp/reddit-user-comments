@@ -1,6 +1,6 @@
-var app = angular.module('RedditUserComments', []);
+var app = angular.module('RedditUserComments', ['ngRoute']);
 
-app.factory('PrepData', [function() {
+app.factory('Data', [function() {
 	return {
 		parse: function(comments) {
 			var data = {
