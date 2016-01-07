@@ -53,7 +53,9 @@ module.exports = function(grunt) {
 		      files: [
 		        'node_modules/angular/angular.js',
 		        'node_modules/angular-mocks/angular-mocks.js',
-		        'script.js'
+						'node_modules/angular-route/angular-route.js',
+		        'script.js',
+						'tests/reddit-user-comments.tests.js'
 		      ]
 		    }
 		  }

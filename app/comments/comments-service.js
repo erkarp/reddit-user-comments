@@ -4,12 +4,12 @@ app.service('Comments', function($http, Data) {
   	   var promise = $http.get('http://www.reddit.com/user/' + user + '/comments/cjvkpaf.json?limit=100')
 
   	  .then(function (response) {
-  		return response.data.data.children;
+  		    return response.data.data.children;
       });
 
       return promise;
     },
-    
+
     analyze: function(data) {
       return Data.parse(data);
     }
