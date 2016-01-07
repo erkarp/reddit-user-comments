@@ -87,6 +87,10 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 			}, function() {
 
 				for (var sub in $rootScope.subColors) {
+
+					//avoids "Error: Failed to execute 'querySelectorAll'"
+					sub = sub.replace(/[0-9]/g, '')
+
 					d3.selectAll('circle.' + sub)
 						.style('fill', $rootScope.subColors[sub]);
 				}
