@@ -2,6 +2,10 @@ app.controller('CloudController', ['$scope', '$rootScope', '$location', 'Comment
 function($scope, $rootScope, $location, Comments, Color){
 
 	$scope.createChart = function(user) {
+		if (user == undefined) {
+			user = $scope.username;
+		}
+
 		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.errorClass = false;
@@ -27,10 +31,10 @@ function($scope, $rootScope, $location, Comments, Color){
 	};
 
 
-		if ($location.url().length > 1) {
-			alert($location.url(), $location.url().length);
-			$scope.createChart($location.url().slice(1));
-		}
+	if ($location.url().length > 1) {
+		$scope.username = $location.url().slice(1);
+		$scope.createChart($scope.username);
+	}
 
 
 	$scope.color = function() {

@@ -11,7 +11,7 @@
 <body ng-controller="CloudController as cloud">
 	<div class="container">
 
-		<p>www.reddit.com/u/<input type="text" ng-model="username">/ <button type="submit" ng-click="createChart(username)">Go</button>
+		<p>www.reddit.com/u/<input type="text" ng-model="user" placeholder="{{username}}">/ <button type="submit" ng-click="createChart(user)">Go</button>
 		<button ng-click="color()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
 
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>

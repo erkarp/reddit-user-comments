@@ -1,5 +1,6 @@
 describe('RedditUserComments', function() {
 
+  console.log('~~~~~IN TEST~~~~~');
   beforeEach(module('RedditUserComments'));
 
   beforeEach(inject(function($injector) {
