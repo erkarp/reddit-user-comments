@@ -1,12 +1,14 @@
 var app = angular.module('RedditUserComments', ['ngRoute']);
 
-app.config(function ($routeProvider) {
+app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
-        .when('/:param', {
-            templateUrl: 'js/main/main.html',
-            controller: 'MainCtrl'
-        })
-        .otherwise({
-            redirectTo: '/'
-        });
+      .when('/:param', {
+          templateUrl: 'app/main/main.html',
+          controller: 'MainCtrl'
+      })
+      .otherwise({
+          redirectTo: '/'
+      });
+
+    $locationProvider.html5Mode(true);
 });

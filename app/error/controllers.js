@@ -1,5 +1,5 @@
-app.controller('CloudController', ['$scope', '$rootScope', 'Comments', 'Color',
-function($scope, $rootScope, Comments, Color){
+app.controller('CloudController', ['$scope', '$rootScope', '$location', 'Comments', 'Color',
+function($scope, $rootScope, $location, Comments, Color){
 
 	$scope.createChart = function(user) {
 		$scope.setSub = 'all';
@@ -17,14 +17,21 @@ function($scope, $rootScope, Comments, Color){
 			$scope.errorClass = false;
 	    $scope.comments = result;
 	    $scope.data = Comments.analyze(result);
-			console.dir($scope.comments);
-			console.dir($scope.data);
 
+			var ref = $location.url();
+			$location.url('/' + user);
 		},
     function (red) {
 			$scope.errorClass = 'red';
     });
 	};
+
+
+		if ($location.url().length > 1) {
+			alert($location.url(), $location.url().length);
+			$scope.createChart($location.url().slice(1));
+		}
+
 
 	$scope.color = function() {
 		Color.reddits();

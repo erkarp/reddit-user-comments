@@ -1,12 +1,10 @@
-app.controller('MainCtrl', ['$log', '$rootScope', '$scope', 'PrepData', 'Color',
-function($log, $rootScope, $scope, PrepData, Color) {
+app.controller('MainCtrl', ['$log', '$rootScope', '$scope', 'Data', 'Color',
+function($log, $rootScope, $scope, Data, Color) {
 
   $scope.setSub = function(sub) {
 		$rootScope.chosenSub = sub;
 	};
 
-
-  this.analyze = function(data) {
-  }
+  $scope.setSub('all');
 
 }]);
