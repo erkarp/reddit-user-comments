@@ -7,18 +7,25 @@ app.directive('comment', ['$rootScope', function($rootScope) {
       },
       link: function (scope, element, attrs) {
 
-			function setCommentLabelColors(color) {
-				scope.commentData.subColor = color;
-			};
+    			function setCommentLabelColors(color) {
+    				scope.commentData.subColor = color;
+    			};
 
-			scope.$watch(function() {
-				if ($rootScope.subColors[scope.commentData.subreddit]) {
-					return $rootScope.subColors[scope.commentData.subreddit];
-				}
-			},
-			function(value) {
-				setCommentLabelColors(value);
-			});
+          var converter = new showdown.Converter(),
+              body = scope.commentData.body;
+              
+          body = converter.makeHtml(body);
+          body = angular.element(body);
+          element.append(body);
+
+    			scope.$watch(function() {
+    				if ($rootScope.subColors[scope.commentData.subreddit]) {
+    					return $rootScope.subColors[scope.commentData.subreddit];
+    				}
+    			},
+    			function(value) {
+    				setCommentLabelColors(value);
+    			});
 
       }
     };
