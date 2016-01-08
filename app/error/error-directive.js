@@ -21,7 +21,7 @@ app.directive('error', function () {
     		scope.message = checkError();
 
 
-    		scope.$watch(function() { return scope.type; }, function(value) {
+    		scope.$watch(function() { return scope.error; }, function(value) {
     			if(!value) return;
     			scope.message = checkError();
     		});

@@ -1,19 +1,15 @@
-@mixin error-box($color) {
-	background-color: rgba($color, .15);
-	border-left: 7px solid $color;
-}
 @keyframes spin {
   0% { transform: rotate(0); }
   100% { transform: rotate(360deg); }
 }
 
 body {
-	padding-top: 20px;
+	padding-top: 30px;
 	font-family: sans-serif;
 	font-size: 16px;
 }
 .container {
-	max-width:650px;
+	max-width: 650px;
 	margin: 0 auto;
 }
 
@@ -40,6 +36,13 @@ body {
 		padding: 1px 0.5rem;
 	}
 }
+
+error {
+	display: block;
+	margin: 4rem 0;
+	padding: 10px 0;
+}
+
 
 .respin {
 	float: right;
