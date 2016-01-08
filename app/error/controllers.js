@@ -6,19 +6,20 @@ function($scope, $rootScope, $location, Comments, Color){
 			user = $scope.username;
 		}
 
+		$scope.username = user;
 		$scope.setSub = 'all';
 		$scope.comments = false;
-		$scope.errorClass = false;
+		$scope.error = false;
 		$rootScope.subColors = [];
 
 		Comments.async(user)
 		.then(function(result) {
 
 			if (result[11] == undefined) {
-				$scope.errorClass = 'orange';
+				$scope.error = 'warning';
 				return;
 			}
-			$scope.errorClass = false;
+			$scope.error = false;
 	    $scope.comments = result;
 	    $scope.data = Comments.analyze(result);
 
@@ -26,7 +27,7 @@ function($scope, $rootScope, $location, Comments, Color){
 			$location.url('/' + user);
 		},
     function (red) {
-			$scope.errorClass = 'red';
+			$scope.error = 'danger';
     });
 	};
 

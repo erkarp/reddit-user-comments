@@ -13,13 +13,7 @@
 </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
-<!--
-		<p>www.reddit.com/u/<input type="text" ng-model="user" placeholder="{{username}}">/
-      <button type="submit" ng-click="createChart(user)">Go</button>
-		<button ng-click="color()" ng-show="data&&comments" class="respin">
-      <div class="colors"></div>
-    </button></p>
--->
+
     <nav class="navbar navbar-default navbar-fixed-top sticky">
       <div class="container">
 
@@ -37,7 +31,7 @@
       </div>
     </nav>
 
-		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
+		<error ng-show="error" error="error" ng-class="{{'error'}}"></error>
 
     <main ng-show="data&&comments&&!errorClass" ng-view ng-controller="MainCtrl as main"></main>
 
