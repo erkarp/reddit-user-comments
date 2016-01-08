@@ -50,6 +50,7 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 					.call(yAxis);
 
 				for (var line in data) {
+
 					svg.selectAll("dot")
 						.data(data[line])
 						.enter().append("circle")
@@ -89,7 +90,7 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 				for (var sub in $rootScope.subColors) {
 
 					//avoids "Error: Failed to execute 'querySelectorAll'"
-					sub = sub.replace(/[0-9]/g, '')
+					sub = sub.replace(/[0-9]/g, '');
 
 					d3.selectAll('circle.' + sub)
 						.style('fill', $rootScope.subColors[sub]);
@@ -98,7 +99,28 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 			});
 
 
+			scope.$watch(function() {
+
+				if ($rootScope.chosenSub != undefined) {
+					return $rootScope.chosenSub;
+				}
+
+			}, function(value) {
+				if (value === 'all') {
+
+					d3.selectAll('circle')
+						.style('display', 'block');
+
+				} else {
+
+					d3.selectAll('circle')
+						.style('display', 'none');
+
+					d3.selectAll('circle.' + value)
+						.style('display', 'block');
+
+				}
+			});
 		}
 	}
-
 }]);

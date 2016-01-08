@@ -26,6 +26,7 @@ app.factory('Data', [function() {
 		},
 
 		addLine: function(data, subreddit) {
+	//		subreddit = subreddit.replace(/[0-9]/g, '');
 			if (this.getLine(data, subreddit, true) == -1) {
 				data.datasets.push({
 					label: subreddit,

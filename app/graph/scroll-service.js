@@ -10,9 +10,11 @@ app.service('Scroll', function($location, $anchorScroll) {
 
 
 app.service('Color', function($rootScope, Shuffle) {
+
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	};
+
 	var color = [],  data = {}, cObj = {};
 	color = color.concat(d3.scale.category10().range());
 	color = color.concat(d3.scale.category20().range());
