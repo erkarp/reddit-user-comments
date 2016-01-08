@@ -28,11 +28,8 @@ ul#comments li {
 }
 
 p {
-	margin: 0 0 2px 0;
-	padding: 0;
-	&:last-child {
-		line-height: 1.8em; 
-	}
+	margin: 0 0 5px 0;
+	line-height: 1.4em;
 }
 
 .date {

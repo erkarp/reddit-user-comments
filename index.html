@@ -1,8 +1,9 @@
 <html ng-app="RedditUserComments">
   <head>
-	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/reddit-user-comments/">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css"/>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
@@ -17,7 +18,7 @@
 
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 
-    <main ng-view  ng-show="comments&&!errorClass"></main>
+    <main ng-show="data&&comments&&!errorClass" ng-view></main>
 
 	</div>
 </body>
