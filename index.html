@@ -2,7 +2,8 @@
   <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <base href="/reddit-user-comments/">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
@@ -12,13 +13,33 @@
 </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
+<!--
+		<p>www.reddit.com/u/<input type="text" ng-model="user" placeholder="{{username}}">/
+      <button type="submit" ng-click="createChart(user)">Go</button>
+		<button ng-click="color()" ng-show="data&&comments" class="respin">
+      <div class="colors"></div>
+    </button></p>
+-->
+    <nav class="navbar navbar-default navbar-fixed-top sticky">
+      <div class="container">
 
-		<p>www.reddit.com/u/<input type="text" ng-model="user" placeholder="{{username}}">/ <button type="submit" ng-click="createChart(user)">Go</button>
-		<button ng-click="color()" ng-show="data&&comments" class="respin">Shuffle Colors</button></p>
+        <span class="navbar-brand">www.reddit.com/u/<input class="form-control" type="text" ng-model="user" placeholder="{{username}}">/
+          <button class="btn" type="submit" ng-click="createChart(user)">Go</button></span>
+
+        <div id="navbar" ng-show="data&&comments&&!errorClass">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><button ng-click="color()" ng-show="data&&comments" class="respin">
+              <div class="colors"></div>
+            </button></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+
+      </div>
+    </nav>
 
 		<error ng-show="errorClass" error="errorClass" ng-class="{{'errorClass'}}"></error>
 
-    <main ng-show="data&&comments&&!errorClass" ng-view></main>
+    <main ng-show="data&&comments&&!errorClass" ng-view ng-controller="MainCtrl as main"></main>
 
 	</div>
 </body>
