@@ -13,10 +13,7 @@ app.directive('comment', ['$rootScope', function($rootScope) {
 
           var converter = new showdown.Converter(),
               body = scope.commentData.body;
-              
-          body = converter.makeHtml(body);
-          body = angular.element(body);
-          element.append(body);
+          scope.comment = converter.makeHtml(body);
 
     			scope.$watch(function() {
     				if ($rootScope.subColors[scope.commentData.subreddit]) {

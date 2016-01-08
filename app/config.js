@@ -1,4 +1,4 @@
-var app = angular.module('RedditUserComments', ['ngRoute']);
+var app = angular.module('RedditUserComments', ['ngRoute', 'ngSanitize']);
 
 app.config(function ($routeProvider, $locationProvider) {
     $routeProvider
