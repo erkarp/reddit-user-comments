@@ -1,0 +1,33 @@
+.respin {
+	float: right;
+	visibility: hidden;
+}
+
+.colors {
+  border: 2px solid gray;
+  border-top-color: gold;
+  border-right-color: red;
+  border-bottom-color: blue;
+  border-left-color: green;
+  border-radius: 100%;
+  width: 15px;
+  height: 15px;
+  opacity: .75;
+  margin: 10px auto;
+	visibility: visible;
+}
+
+.colors:hover {
+  opacity: 1;
+  animation: spin 3s infinite linear;
+  transition: opacity 3s;
+}
+
+.colors:active {
+  width: 19px;
+  height: 19px;
+  margin-top: 8px;
+  margin-right: -2px;
+  animation: none;
+  transform: rotate(0deg);
+}
