@@ -93,7 +93,7 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 					sub = sub.replace(/[0-9]/g, '');
 
 					d3.selectAll('circle.' + sub)
-						.style('fill', $rootScope.subColors[sub]);
+						.attr('fill', $rootScope.subColors[sub]);
 				}
 
 			});
@@ -113,12 +113,10 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 
 				} else {
 
-					d3.selectAll('circle')
-						.style('display', 'none');
+						d3.selectAll('circle')
+							.style('display', 'none');
 
-					d3.selectAll('circle.' + value)
-						.style('display', 'block');
-
+						Color.ripple(value);
 				}
 			});
 		}

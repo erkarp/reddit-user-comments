@@ -34,6 +34,29 @@ app.service('Color', function($rootScope, Shuffle) {
 
 		$rootScope.subColors = cObj;
 	};
+
+	this.ripple = function(sub) {
+		var color = $rootScope.subColors[sub];
+
+		d3.selectAll('circle.' + sub)
+			.attr('r', 15)
+			.attr('fill', '#fff')
+			.attr('fill-opacity', 0)
+			.attr('stroke', color)
+			.attr('stroke-width', 2)
+			.style('display', 'block')
+			.transition()
+			.attr('r', 2)
+			.duration(800)
+			.attr('fill', color);
+
+		d3.selectAll('circle.' + sub)
+			.transition()
+			.delay(800)
+			.attr('stroke-width', 0)
+			.attr('fill-opacity', 100)
+			.attr('r', 3);
+	};
 });
 
 app.service('Shuffle', function () {
