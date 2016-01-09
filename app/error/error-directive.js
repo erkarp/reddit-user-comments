@@ -1,7 +1,7 @@
 app.directive('error', function () {
     return {
       restrict: 'E',
-	    template: '<div class="alert alert-{{error}}"><i class="fa fa-exclamation-circle"></i>{{$parent.username}} {{message}}</div>',
+	    template: '<div class="alert alert-{{error}}"><i class="fa fa-exclamation-circle"></i><p>{{$parent.username}} {{message}}</p></div>',
       scope: {
         error: '=',
 		    message: '@',

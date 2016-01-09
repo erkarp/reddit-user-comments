@@ -42,7 +42,8 @@
 }
 
 .fa-reddit-alien:hover {
-	animation: wobble 1s bounce;
+	animation: wobble 1s ease-out;
+  transform-origin: 65% 50% 0;
 }
 
 .colors:hover {
@@ -52,4 +53,12 @@
 
 .colors:active {
   animation: none;
+}
+
+.mobile {
+  display: block;
+
+  @media(min-width: 540px) {
+    display: none;
+  }
 }

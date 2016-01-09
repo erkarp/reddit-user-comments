@@ -36,6 +36,15 @@ error {
 	display: block;
 	margin: 4rem 0;
 	padding: 10px 0;
+
+	.alert {
+		display: flex;
+		align-items: center;
+	}
+
+	.fa {
+		margin-right: .8em;
+	}
 }
 
 

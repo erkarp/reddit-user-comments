@@ -41,7 +41,7 @@ app.service('Shuffle', function () {
 		array: function(array) {
 		  var m = array.length, t, i;
 
-		  while (m) {
+		  while(m) {
 		    i = Math.floor(Math.random() * m--);
 		    t = array[m];
 		    array[m] = array[i];
