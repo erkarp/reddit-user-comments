@@ -33,6 +33,12 @@ function($scope, $rootScope, $location, Comments, Color){
 
 
 	if ($location.url().length > 1) {
+
+		if ($location.url().indexOf("#") > -1) {
+			var i = $location.url().indexOf("#");
+			$location.url($location.url().slice(1,i));
+		}
+
 		$scope.username = $location.url().slice(1);
 		$scope.createChart($scope.username);
 	}
