@@ -11,6 +11,14 @@
   100% { transform: rotate(0deg); }
 }
 
+@keyframes bounce {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(0, -.3em); }
+  50% { transform: translate(0, .2em); }
+  75% { transform: translate(0, -.1em); }
+  100% { transform: translate(0, 0); }
+}
+
 .nav-item {
 	margin: 0 5px;
 	display: inline-block;
@@ -28,11 +36,14 @@
 
 	&.fa-reddit-alien,
   &.fa-arrow-up {
-    color: #0275d8;
 		border-color: #fff;
 		padding-top: 1px;
 		margin-right: 0;
 	}
+
+  &.fa-arrow-up {
+    color: #893FD6;
+  }
 }
 
 .colors {
@@ -41,11 +52,16 @@
   border-bottom-color: blue;
   border-left-color: green;
   border-radius: 100%;
+  margin-left: 6px;
 }
 
 .fa-reddit-alien:hover {
 	animation: wobble 1s ease-out;
   transform-origin: 65% 50% 0;
+}
+
+.fa-arrow-up:hover {
+  animation: bounce .5s ease-out;
 }
 
 .colors:hover {
@@ -54,7 +70,7 @@
 }
 
 .colors:active {
-  animation: none;
+  animation-play-state: paused;
 }
 
 .mobile {
