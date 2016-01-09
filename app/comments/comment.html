@@ -1,10 +1,14 @@
 <header class="card-header">
-	<a class="subreddit {{commentData.subreddit}}" style="background-color:{{commentData.subColor}}" href="http://www.reddit.com/r/{{commentData.subreddit}}">{{commentData.subreddit}}</a>
+		<a class="subreddit {{commentData.subreddit}}" style="background-color:{{commentData.subColor}}"
+		href="http://www.reddit.com/r/{{commentData.subreddit}}">{{commentData.subreddit}}</a>
 
-	<a class="perma" href="{{commentData.link_url+commentData.id}}">(link)</a><span class="date">{{commentData.created*1000 | date}}</span>
+		<ul class="nav pull-right">
+			<li class="nav-item up"><i class="fa fa-thumbs-o-up"></i>{{commentData.ups}}</li>
+			<li class="nav-item link">.<a target="_offsite" href="{{commentData.link_url+commentData.id}}"><i class="fa fa-external-link"></i></a></li>
+			<li class="nav-item date">{{commentData.created*1000 | date}}</li>
+		</ul>
 
-	<a class="post" href="{{commentData.link_url}}">{{commentData.link_title}}</a>
+		<p class="post-title">{{commentData.link_title}}</p>
 </header>
-
 
 <div class="card-block" ng-bind-html="comment"></div>

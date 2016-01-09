@@ -1,6 +1,7 @@
 <html ng-app="RedditUserComments">
-  <head>
+<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reddit User Comments</title>
   <base href="/reddit-user-comments/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">
@@ -11,6 +12,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.3.0/showdown.min.js"></script>
 	<script src="script.js"></script>
+  <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Raleway'>
 </head>
 <body ng-controller="CloudController as cloud">
 	<div class="container">
@@ -21,13 +23,13 @@
         <span class="navbar-brand">www.reddit.com/u/<input class="form-control" type="text" ng-model="user" placeholder="{{username}}">/
           <button class="btn btn-primary" type="submit" ng-click="createChart(user)">Go</button></span>
 
-        <div id="navbar" ng-show="data&&comments&&!errorClass">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><button ng-click="color()" ng-show="data&&comments" class="respin">
-              <div class="colors"></div>
-            </button></li>
+        <nav id="navbar" ng-show="data&&comments&&!errorClass">
+          <ul class="nav pull-right">
+						<li class="nav-item"><a href="#0" on-click=""></a></li>
+            <li class="nav-item"><a target="_offsite" href="http://www.reddit.com/user/{{username}}"><i class="fa fa-lg fa-reddit-alien"></i></a></li>
+            <li class="nav-item"><i ng-click="color()" ng-show="data&&comments" class="fa colors"></i></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </nav>
 
       </div>
     </nav>

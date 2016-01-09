@@ -1,4 +1,4 @@
-menu, ul#comments {
+menu, #comments {
 	list-style: none;
 	padding: 0;
 	display: flex;
@@ -12,7 +12,7 @@ menu, ul#comments {
 	background-color: #ccc;
 	color: #fff;
   border: 0;
-	margin: 2px;
+	margin: 2px 4px 2px 2px;
 	padding: 4px 6px 3px;
 	border-radius: 1px;
   font-size: 16px;

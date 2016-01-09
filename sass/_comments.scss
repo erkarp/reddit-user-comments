@@ -1,42 +1,51 @@
-#comments {
-	display: block;
-	font-size: 14px;
-}
-
-#comments li {
-	width: 100%;
-
-	a {
-		line-height: 1.6em;
-		text-decoration: none;
-
-		&.post {
-			color: #3B79B7;
-		}
-	}
-
-	.subreddit {
-		line-height: 1em;
-		margin: 0 1px 0 0;
-		padding: 1px;
-		opacity: 1;
-	}
-}
-
 p {
 	margin: 0 0 5px 0;
 	line-height: 1.4em;
 }
 
-.date {
-	float: right;
-	font-style: italic;
-	opacity: .9;
+
+#comments {
+	font-size: 14px;
+
+	> li {
+		width: 100%;
+	}
 }
-.perma {
-	color: inherit;
-	font-style: italic;
-	font-weight: lighter;
-	font-size: 12px;
-	text-decoration: none;
+
+
+.card-header {
+	width: 100%;
+
+	.subreddit {
+		opacity: 1;
+    margin: 2px 0;
+    padding: 3px 2px 2px 2px;
+		line-height: 1em;
+
+		&:hover {
+			color: inherit;
+		}
+	}
+
+	.post-title {
+		font-size: .9em;
+		margin: 5px 0 0 0;
+		display: inline-block;
+	}
+
+	.up {
+		color: green;
+		opacity: .8;
+	}
+	.link {
+		opacity: .8;
+
+		&:hover {
+			opacity: 1;
+		}
+	}
+
+	.date {
+		color: #252144
+	}
 }

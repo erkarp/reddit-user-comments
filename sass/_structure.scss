@@ -1,12 +1,7 @@
-@keyframes spin {
-  0% { transform: rotate(0); }
-  100% { transform: rotate(360deg); }
-}
-
 body {
-	padding-top: 30px;
-	font-family: sans-serif;
+	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
+  padding-top: 20px;
 }
 .container {
 	max-width: 650px;
