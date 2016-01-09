@@ -1,7 +1,11 @@
 app.service('Scroll', function($location, $anchorScroll) {
 
+	$anchorScroll.yOffset = function() {
+		return 50;
+	}
+
 	this.to = function(id) {
-		$location.hash("comment"+id);
+		$location.hash(id);
 		$anchorScroll();
 		$location.hash('');
 	};

@@ -21,13 +21,13 @@
       <div class="container">
 
         <span class="navbar-brand">www.reddit.com/u/<br class="mobile"/>
-					<input class="form-control" type="text" ng-model="user" placeholder="{{username}}">/
+					<input class="form-control" type="search" ng-model="user" placeholder="{{username}}">/
           <button class="btn btn-primary" type="submit" ng-click="createChart(user)">Go</button>
 				</span>
 
         <nav id="navbar" ng-show="data&&comments&&!errorClass">
           <ul class="nav pull-right">
-						<li class="nav-item"><a href="#0" on-click=""></a></li>
+						<li class="nav-item"><i ng-click="scroll()" class="fa fa-lg fa-arrow-up"></i></li>
             <li class="nav-item"><a target="_offsite" href="http://www.reddit.com/user/{{username}}"><i class="fa fa-lg fa-reddit-alien"></i></a></li>
             <li class="nav-item"><i ng-click="color()" ng-show="data&&comments" class="fa colors"></i></li>
           </ul>
@@ -38,7 +38,7 @@
 
 		<error ng-show="error" error="error" ng-class="{{'error'}}"></error>
 
-    <main ng-show="data&&comments&&!errorClass" ng-view ng-controller="MainCtrl as main"></main>
+    <main ng-show="data&&comments&&!errorClass" id="main" ng-view ng-controller="MainCtrl as main"></main>
 
 	</div>
 </body>

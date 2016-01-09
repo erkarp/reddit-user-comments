@@ -1,5 +1,5 @@
-app.controller('CloudController', ['$scope', '$rootScope', '$location', 'Comments', 'Color',
-function($scope, $rootScope, $location, Comments, Color){
+app.controller('CloudController', ['$scope', '$rootScope', '$location', 'Comments', 'Color', 'Scroll',
+function($scope, $rootScope, $location, Comments, Color, Scroll){
 
 	$scope.createChart = function(user) {
 		if (user == undefined) {
@@ -43,6 +43,9 @@ function($scope, $rootScope, $location, Comments, Color){
 		$scope.createChart($scope.username);
 	}
 
+	$scope.scroll = function() {
+		Scroll.to('main');
+	}
 
 	$scope.color = function() {
 		Color.reddits();

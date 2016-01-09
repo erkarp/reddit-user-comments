@@ -24,8 +24,11 @@
   vertical-align: middle;
   border-width: 2.5px;
   border-style: solid;
+	cursor: pointer;
 
-	&.fa-reddit-alien {
+	&.fa-reddit-alien,
+  &.fa-arrow-up {
+    color: #0275d8;
 		border-color: #fff;
 		padding-top: 1px;
 		margin-right: 0;
@@ -38,7 +41,6 @@
   border-bottom-color: blue;
   border-left-color: green;
   border-radius: 100%;
-	cursor: pointer;
 }
 
 .fa-reddit-alien:hover {

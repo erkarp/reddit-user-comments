@@ -60,7 +60,8 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 						.attr("id", function(d) { return d.id; })
 						.classed(line, true)
 						.on("click", function() {
-							Scroll.to( d3.select(this).attr("id") );
+							var id = d3.select(this).attr("id");
+							Scroll.to( 'comment' + id );
 						});
 
 				};
