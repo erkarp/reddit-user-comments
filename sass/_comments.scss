@@ -46,6 +46,9 @@ p {
 	}
 
 	.date {
-		color: #252144
+		color: #252144;
+		display: inline-block;
+		text-align: right;
+		width: 6em;
 	}
 }

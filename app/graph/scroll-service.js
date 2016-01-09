@@ -43,20 +43,22 @@ app.service('Color', function($rootScope, Shuffle) {
 		var color = $rootScope.subColors[sub];
 
 		d3.selectAll('circle.' + sub)
-			.attr('r', 15)
+			.attr('r', 35)
 			.attr('fill', '#fff')
 			.attr('fill-opacity', 0)
 			.attr('stroke', color)
 			.attr('stroke-width', 2)
+			.attr('stroke-opacity', .4)
 			.style('display', 'block')
 			.transition()
 			.attr('r', 2)
-			.duration(800)
-			.attr('fill', color);
+			.duration(1000)
+			.attr('fill', color)
+			.attr('stroke-opacity', 1);
 
 		d3.selectAll('circle.' + sub)
 			.transition()
-			.delay(800)
+			.delay(900)
 			.attr('stroke-width', 0)
 			.attr('fill-opacity', 100)
 			.attr('r', 3);
