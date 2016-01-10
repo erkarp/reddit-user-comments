@@ -110,14 +110,17 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 				if (value === 'all') {
 
 					d3.selectAll('circle')
-						.style('display', 'block');
+						.transition()
+						.attr('r', 3)
+						.duration(400);
 
 				} else {
 
-						d3.selectAll('circle')
-							.style('display', 'none');
+					d3.selectAll('circle')
+						.attr('r', 0);
 
-						Color.ripple(value);
+					Color.ripple(value);
+
 				}
 			});
 		}

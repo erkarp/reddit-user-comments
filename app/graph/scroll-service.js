@@ -48,7 +48,7 @@ app.service('Color', function($rootScope, Shuffle) {
 			.attr('fill-opacity', 0)
 			.attr('stroke', color)
 			.attr('stroke-width', 2)
-			.attr('stroke-opacity', .4)
+			.attr('stroke-opacity', 0)
 			.style('display', 'block')
 			.transition()
 			.attr('r', 2)
