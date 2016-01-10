@@ -58,7 +58,7 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 						.attr("cx", function(d) { return x(d.x); })
 						.attr("cy", function(d) { return y(d.y); })
 						.attr("id", function(d) { return d.id; })
-						.classed(line, true)
+						.classed(line.replace(/[0-9]/g, ''), true)
 						.on("click", function() {
 							var id = d3.select(this).attr("id");
 							Scroll.to( 'comment' + id );
@@ -99,30 +99,6 @@ app.directive('graph', ['$rootScope', 'Graph', 'Color', 'Scroll', function ($roo
 
 			});
 
-
-			scope.$watch(function() {
-
-				if ($rootScope.chosenSub != undefined) {
-					return $rootScope.chosenSub;
-				}
-
-			}, function(value) {
-				if (value === 'all') {
-
-					d3.selectAll('circle')
-						.transition()
-						.attr('r', 3)
-						.duration(400);
-
-				} else {
-
-					d3.selectAll('circle')
-						.attr('r', 0);
-
-					Color.ripple(value);
-
-				}
-			});
 		}
 	}
 }]);

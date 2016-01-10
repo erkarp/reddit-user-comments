@@ -40,29 +40,44 @@ app.service('Color', function($rootScope, Shuffle) {
 	};
 
 	this.ripple = function(sub) {
-		var color = $rootScope.subColors[sub];
 
-		d3.selectAll('circle.' + sub)
-			.attr('r', 35)
-			.attr('fill', '#fff')
-			.attr('fill-opacity', 0)
-			.attr('stroke', color)
-			.attr('stroke-width', 2)
-			.attr('stroke-opacity', 0)
-			.style('display', 'block')
-			.transition()
-			.attr('r', 2)
-			.duration(1000)
-			.attr('fill', color)
-			.attr('stroke-opacity', 1);
+		if (sub === 'all') {
 
-		d3.selectAll('circle.' + sub)
-			.transition()
-			.delay(900)
-			.attr('stroke-width', 0)
-			.attr('fill-opacity', 100)
-			.attr('r', 3);
+			d3.selectAll('circle')
+				.transition()
+				.attr('r', 3)
+				.duration(400);
+
+		} else {
+			var color = $rootScope.subColors[sub],
+					sub = sub.replace(/[0-9]/g, '');
+
+			d3.selectAll('circle')
+				.attr('r', 0);
+
+			d3.selectAll('circle.' + sub)
+				.attr('r', 35)
+				.attr('fill', '#fff')
+				.attr('fill-opacity', 0)
+				.attr('stroke', color)
+				.attr('stroke-width', 2)
+				.attr('stroke-opacity', .1)
+				.style('display', 'block')
+				.transition()
+				.attr('r', 2)
+				.duration(1000)
+				.attr('fill', color)
+				.attr('stroke-opacity', 1);
+
+			d3.selectAll('circle.' + sub)
+				.transition()
+				.delay(900)
+				.attr('stroke-width', 0)
+				.attr('fill-opacity', 100)
+				.attr('r', 3);
+		}
 	};
+
 });
 
 app.service('Shuffle', function () {
