@@ -12,7 +12,6 @@ app.service('Scroll', function($location, $anchorScroll) {
 
 });
 
-
 app.service('Color', function($rootScope, Shuffle) {
 
 	function getRandomInt(min, max) {
