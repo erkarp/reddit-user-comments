@@ -6,12 +6,12 @@ function ($rootScope, Graph, Color, Scroll) {
 			data: '='
 		},
 		link: function(scope, element, attrs) {
-			var size = getSize('.container'),
+			var size = getWidth('.container'),
 				margin = { right: 0, bottom: 25, left: 30, top: 5 },
 				width = size - margin.right - margin.left,
-				height = size - margin.top - margin.bottom;
+				height = 500 - margin.top - margin.bottom;
 
-			function getSize(elem) {
+			function getWidth(elem) {
 				return parseInt(d3.select(elem).style("width"));
 			};
 
@@ -97,8 +97,7 @@ function ($rootScope, Graph, Color, Scroll) {
 						.call(yAxis);
 
 			    /* Force D3 to recalculate and update the line */
-console.log(data);
-console.dir(data);
+
 					for (var line in data) {
 						console.log(line);
 						svg.selectAll('circle')
