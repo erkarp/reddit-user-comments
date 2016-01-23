@@ -15,6 +15,7 @@ function ($rootScope, Graph, Color, Scroll) {
 				return parseInt(d3.select(elem).style("width"));
 			};
 
+
 			function drawGraph(data, xStyle, xDomain, yDomain) {
 
 				if (d3.select('svg') !== undefined) {
@@ -42,6 +43,7 @@ function ($rootScope, Graph, Color, Scroll) {
 					.ticks(10)
 					.orient("bottom")
 					.tickFormat(d3.time.format(xStyle));
+
 				var yAxis = d3.svg.axis()
 					.scale(y)
 					.orient("left");
@@ -68,24 +70,17 @@ function ($rootScope, Graph, Color, Scroll) {
 							var id = d3.select(this).attr("id");
 							Scroll.to( 'comment' + id );
 						});
-				};
+				}
+
 
 			  function resize() {
-					var container = getSize('.container'),
+					var container = getWidth('.container'),
 							width = container - margin.left - margin.right,
 							height = container - margin.top - margin.bottom;
 
-					var x = d3.time.scale()
-						.domain([xMin, xMax])
-						.range([margin.left, width]);
-
-					var y = d3.scale.linear()
-						.domain([d3.max(yDomain),d3.min(yDomain)])
-						.range([margin.bottom, height+margin.top]);
-
 					/* Update the range of the scale with new width/height */
-			    x.range([0, width]).nice(d3.time.year);
-			    y.range([height, 0]).nice();
+			    x.range([margin.left, width]).nice(d3.time.year);
+			    y.range([margin.bottom, height+margin.top]).nice();
 
 			    /* Update the axis with the new scale */
 			    svg.select('.x.axis')
@@ -100,7 +95,7 @@ function ($rootScope, Graph, Color, Scroll) {
 
 					for (var line in data) {
 						console.log(line);
-						svg.selectAll('circle')
+						svg.selectAll(line)
 							.data(data[line])
 							.attr("cx", function(d) { return x(d.x); })
 							.attr("cy", function(d) { return y(d.y); });
