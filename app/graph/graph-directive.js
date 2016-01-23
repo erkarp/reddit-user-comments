@@ -6,13 +6,21 @@ function ($rootScope, Graph, Color, Scroll) {
 			data: '='
 		},
 		link: function(scope, element, attrs) {
-			var size = getWidth('.container'),
-				margin = { right: 0, bottom: 25, left: 30, top: 5 },
-				width = size - margin.right - margin.left,
-				height = 500 - margin.top - margin.bottom;
 
-			function getWidth(elem) {
-				return parseInt(d3.select(elem).style("width"));
+			var margin = { right: 0, bottom: 25, left: 30, top: 5 };
+
+			function getSize() {
+				var size = parseInt(d3.select('.container').style('width')),
+
+					width = size - margin.right - margin.left;
+					height = size > 400 ? 400 : size;
+					height -= margin.top;
+					height -= margin.bottom;
+
+				return {
+					width: width,
+					height: height
+				}
 			};
 
 
@@ -22,6 +30,11 @@ function ($rootScope, Graph, Color, Scroll) {
 					d3.select('svg').remove();
 				}
 
+				var sizes = getSize(),
+						width = sizes.width,
+						height = sizes.height;
+
+					console.log(sizes);
 				var svg = d3.select(element[0])
 					.append('svg')
     				.attr('width', width + margin.right + margin.left)
@@ -74,28 +87,28 @@ function ($rootScope, Graph, Color, Scroll) {
 
 
 			  function resize() {
-					var container = getWidth('.container'),
-							width = container - margin.left - margin.right,
-							height = container - margin.top - margin.bottom;
+					var sizes = getSize(),
+							width = sizes.width,
+							height = sizes.height;
 
-					/* Update the range of the scale with new width/height */
-			    x.range([margin.left, width]).nice(d3.time.year);
-			    y.range([margin.bottom, height+margin.top]).nice();
+					svg
+						.attr('width', width + margin.right + margin.left)
+						.attr('height', height + margin.top + margin.bottom);
 
-			    /* Update the axis with the new scale */
+			    x.range([margin.left, width]);
+			    y.range([margin.bottom, height+margin.top]);
+
 			    svg.select('.x.axis')
 						.attr("transform", "translate(0," + (height+margin.top) + ")")
-						.call(xAxis);
+						.call(xAxis.scale(x));
 
 			    svg.select('.y.axis')
 						.attr("transform", "translate(" + (margin.left) + ", 0)")
-						.call(yAxis);
-
-			    /* Force D3 to recalculate and update the line */
+						.call(yAxis.scale(y));
 
 					for (var line in data) {
 						console.log('circle.' + line);
-						svg.selectAll(line)
+						svg.selectAll('circle.' + line.replace(/[0-9]/g, ''))
 							.data(data[line])
 							.attr("cx", function(d) { return x(d.x); })
 							.attr("cy", function(d) { return y(d.y); });
