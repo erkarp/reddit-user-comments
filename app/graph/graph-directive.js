@@ -94,7 +94,7 @@ function ($rootScope, Graph, Color, Scroll) {
 			    /* Force D3 to recalculate and update the line */
 
 					for (var line in data) {
-						console.log(line);
+						console.log('circle.' + line);
 						svg.selectAll(line)
 							.data(data[line])
 							.attr("cx", function(d) { return x(d.x); })
