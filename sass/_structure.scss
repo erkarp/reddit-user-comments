@@ -1,7 +1,12 @@
+html {
+	overflow-x: hidden;
+}
+
 body {
 	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
   padding-top: 20px;
+	overflow-x: hidden;
 }
 .container {
 	max-width: 650px;
@@ -12,6 +17,7 @@ body {
 	&.navbar {
 		padding: 0;
 		background: #fff;
+		max-width: 100%;
 	}
 	.navbar-brand {
 	  float: left;
