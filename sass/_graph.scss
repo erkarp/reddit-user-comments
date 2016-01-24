@@ -15,3 +15,10 @@ svg {
 circle {
 	cursor: pointer;
 }
+
+
+@media (max-width: 500px) {
+	.x.axis .tick:nth-child(2n+1) {
+		display: none;
+	}
+}

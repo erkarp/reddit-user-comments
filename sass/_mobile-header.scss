@@ -1,0 +1,53 @@
+.mobile, .small-mobile {
+  display: none;
+}
+
+@media (max-width: 565px) {
+  .mobile {
+    display: block;
+  }
+
+  .sticky .navbar-brand {
+    padding-top: 1rem;
+  }
+
+  main {
+    padding-top: 2rem;
+  }
+}
+
+
+@media (max-width: 420px) {
+  #navbar {
+    position: absolute;
+    margin-right: 1em;
+    width: 90%;
+  }
+}
+
+
+@media (max-width: 300px) {
+  .sticky .navbar-brand {
+    padding-top: 2rem;
+  }
+
+  #navbar  ul {
+    width: 120px;
+    margin: 0 auto;
+    float: none !important;
+  }
+
+  main {
+    padding-top: 3rem;
+  }
+}
+
+
+@media (max-width: 290px) {
+  .small-mobile {
+    display: block;
+  }
+  main {
+    padding-top: 4.5rem;
+  }
+}

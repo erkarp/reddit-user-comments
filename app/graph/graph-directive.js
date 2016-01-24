@@ -14,8 +14,7 @@ function ($rootScope, Graph, Color, Scroll) {
 
 					width = size - margin.right - margin.left;
 					height = size > 400 ? 400 : size;
-					height -= margin.top;
-					height -= margin.bottom;
+					height -= margin.top - margin.bottom;
 
 				return {
 					width: width,
@@ -91,8 +90,7 @@ function ($rootScope, Graph, Color, Scroll) {
 							width = sizes.width,
 							height = sizes.height;
 
-					svg
-						.attr('width', width + margin.right + margin.left)
+					svg.attr('width', width + margin.right + margin.left)
 						.attr('height', height + margin.top + margin.bottom);
 
 			    x.range([margin.left, width]);
@@ -107,7 +105,6 @@ function ($rootScope, Graph, Color, Scroll) {
 						.call(yAxis.scale(y));
 
 					for (var line in data) {
-						console.log('circle.' + line);
 						svg.selectAll('circle.' + line.replace(/[0-9]/g, ''))
 							.data(data[line])
 							.attr("cx", function(d) { return x(d.x); })

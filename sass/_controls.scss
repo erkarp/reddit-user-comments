@@ -72,11 +72,3 @@
 .colors:active {
   animation-play-state: paused;
 }
-
-.mobile {
-  display: block;
-
-  @media(min-width: 540px) {
-    display: none;
-  }
-}
