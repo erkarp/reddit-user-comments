@@ -7,9 +7,9 @@ function($scope, $rootScope, $location, Comments, Color, Scroll){
 		}
 
 		$scope.username = user;
-		$scope.setSub = 'all';
 		$scope.comments = false;
 		$scope.error = false;
+		$rootScope.chosenSub = 'all';
 		$rootScope.subColors = [];
 
 		Comments.async(user)
