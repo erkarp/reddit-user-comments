@@ -34,8 +34,7 @@ function ($rootScope, Graph, Color, Scroll) {
 					d3.select('svg').remove();
 				}
 
-				var yMax = d3.max(yDomain);
-				margin.left = leftMargin(10, yMax);
+				margin.left = leftMargin(10, d3.max(yDomain));
 
 				var sizes = getSize(),
 						width = sizes.width,
@@ -54,7 +53,7 @@ function ($rootScope, Graph, Color, Scroll) {
 					.range([margin.left, width]);
 
 				var y = d3.scale.linear()
-					.domain([yMax,d3.min(yDomain)])
+					.domain([d3.max(yDomain),d3.min(yDomain)])
 					.range([margin.bottom, height+margin.top]);
 
 				var xAxis = d3.svg.axis()

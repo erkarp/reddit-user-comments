@@ -1,12 +1,12 @@
 module.exports = function(grunt) {
-//require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
 	function ftpTask(files) {
 		return {
 			options: {
 					host: "wdsclient.com",
-					dest: "/public_html/emilykarp/reddit-user-comments",
 					authKey: "server",
+					dest: "/public_html/reddit-user-comments"
+					/* Reminder: also change .htaccess and <base> in index head */
 			},
 			files: [{
 				expand: true,
