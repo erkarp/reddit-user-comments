@@ -7,7 +7,7 @@ function ($rootScope, Graph, Color, Scroll) {
 		},
 		link: function(scope, element, attrs) {
 
-			var margin = { right: 0, bottom: 25, left: 30, top: 5 };
+			var margin = { right: 10, bottom: 25, left: 30, top: 5 };
 
 			function getSize() {
 				var size = parseInt(d3.select('.container').style('width')),
@@ -22,6 +22,11 @@ function ($rootScope, Graph, Color, Scroll) {
 				}
 			};
 
+			function leftMargin(base, yMax) {
+				if (typeof yMax !== 'number') return;
+				return base * Math.floor(Math.log10(yMax));
+			}
+
 
 			function drawGraph(data, xStyle, xDomain, yDomain) {
 
@@ -29,11 +34,13 @@ function ($rootScope, Graph, Color, Scroll) {
 					d3.select('svg').remove();
 				}
 
+				var yMax = d3.max(yDomain);
+				margin.left = leftMargin(10, yMax);
+
 				var sizes = getSize(),
 						width = sizes.width,
 						height = sizes.height;
 
-					console.log(sizes);
 				var svg = d3.select(element[0])
 					.append('svg')
     				.attr('width', width + margin.right + margin.left)
@@ -47,7 +54,7 @@ function ($rootScope, Graph, Color, Scroll) {
 					.range([margin.left, width]);
 
 				var y = d3.scale.linear()
-					.domain([d3.max(yDomain),d3.min(yDomain)])
+					.domain([yMax,d3.min(yDomain)])
 					.range([margin.bottom, height+margin.top]);
 
 				var xAxis = d3.svg.axis()
@@ -64,6 +71,7 @@ function ($rootScope, Graph, Color, Scroll) {
 					.attr("class", "x axis")
 					.attr("transform", "translate(0," + (height+margin.top) + ")")
 					.call(xAxis);
+
 				svg.append("g")
 					.attr("class", "y axis")
 					.attr("transform", "translate(" + (margin.left) + ", 0)")
