@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 			options: {
 					host: "wdsclient.com",
 					authKey: "server",
-					dest: "/public_html/em/code"
+					dest: "/public_html/emilykarp/reddit-user-comments"
 					/* Reminder: also change .htaccess and <base> in index head */
 			},
 			files: [{

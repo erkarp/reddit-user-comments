@@ -4,4 +4,4 @@ RewriteCond %{REQUEST_FILENAME} -l [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^.*$ - [NC,L]
 
-RewriteRule ^(.*) /em/code/ [NC,L]
+RewriteRule ^(.*) /reddit-user-comments/ [NC,L]
