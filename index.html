@@ -2,7 +2,7 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reddit User Comments</title>
-  <base href="/reddit-user-comments/">
+  <base href="/em/code/">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
@@ -20,11 +20,11 @@
     <nav class="navbar navbar-default navbar-fixed-top sticky">
       <div class="container">
 
-        <span class="navbar-brand">www.reddit.com/u/<br class="mobile"/>
-					<input class="form-control" type="search" ng-model="user" placeholder="{{username}}">
-					<br class="small-mobile"/>/
-          <button class="btn btn-primary" type="submit" ng-click="createChart(user)">Go</button>
-				</span>
+        <form class="navbar-brand">www.reddit.com/u/<br class="mobile"/>
+					<input type="search" class="form-control" ng-model="user" placeholder="{{username}}">/
+					<br class="small-mobile"/>
+          <input type="submit" class="btn btn-primary" ng-click="createChart(user)" value="Go">
+				</form>
 
         <nav id="navbar" ng-show="data&&comments&&!errorClass">
           <ul class="nav pull-right">
