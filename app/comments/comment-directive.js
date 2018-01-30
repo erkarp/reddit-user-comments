@@ -13,6 +13,7 @@ app.directive('comment', ['$rootScope', function($rootScope) {
 
           var converter = new showdown.Converter(),
               body = scope.commentData.body;
+              
           scope.comment = converter.makeHtml(body);
 
     			scope.$watch(function() {
@@ -23,7 +24,6 @@ app.directive('comment', ['$rootScope', function($rootScope) {
     			function(value) {
     				setCommentLabelColors(value);
     			});
-
       }
     };
   }]);

@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+//require('load-grunt-tasks')(grunt); // npm install --save-dev load-grunt-tasks
 
 	grunt.config.init({
 		sass: {
@@ -7,7 +8,7 @@ module.exports = function(grunt) {
 			},
 			dist: {
 				files: {
-					'stylesheets/style.css': 'sass/style.scss'
+					'style.css': 'sass/style.scss'
 				}
 			}
 		},
