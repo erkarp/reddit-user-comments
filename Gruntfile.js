@@ -1,21 +1,5 @@
 module.exports = function(grunt) {
 
-	function ftpTask(files) {
-		return {
-			options: {
-					host: "wdsclient.com",
-					authKey: "server",
-					dest: "/public_html/emilykarp/reddit-user-comments"
-					/* Reminder: also change .htaccess and <base> in index head */
-			},
-			files: [{
-				expand: true,
-				cwd: '.',
-				src: [ files ]
-			}]
-		}
-	};
-
 	grunt.config.init({
 		sass: {
 			options: {
@@ -59,17 +43,6 @@ module.exports = function(grunt) {
 		      ]
 		    }
 		  }
-		},
-		ftp_push: {
-			css: ftpTask([
-				'stylesheets/style.css'
-			]),
-			html: ftpTask([
-				'**.html', 'app/**/*.html'
-			]),
-			js: ftpTask([
-				'script.js'
-			])
 		}
 	});
 
@@ -78,10 +51,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-karma');
 
-	grunt.registerTask('html', ['ftp_push:html']);
-	grunt.registerTask('css',  ['sass', 'ftp_push:css']);
-	grunt.registerTask('js',   ['concat', 'ftp_push:js']);
 	grunt.registerTask('test', ['concat','karma']);
-
-	grunt.registerTask('default', ['js', 'css', 'html']);
+	grunt.registerTask('default', ['concat', 'sass']);
 };
