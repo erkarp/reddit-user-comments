@@ -78,10 +78,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-sass');
 	grunt.loadNpmTasks('grunt-karma');
 
-	grunt.registerTask('html', ['ftp_push:html']);
-	grunt.registerTask('css',  ['sass', 'ftp_push:css']);
-	grunt.registerTask('js',   ['concat', 'ftp_push:js']);
-	grunt.registerTask('test', ['concat','karma']);
+	grunt.registerTask('css',  ['sass']);
+	grunt.registerTask('js',   ['concat']);
+	grunt.registerTask('test', ['concat', 'karma']);
 
-	grunt.registerTask('default', ['js', 'css', 'html']);
+	grunt.registerTask('ftp_css',  ['ftp_push:css']);
+	grunt.registerTask('ftp_js',   ['ftp_push:js']);
+	grunt.registerTask('ftp_html', ['ftp_push:html']);
+
+	grunt.registerTask('build', ['js', 'css']);
+	grunt.registerTask('default', ['css', 'test']);
 };
